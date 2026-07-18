@@ -2,13 +2,13 @@
 import { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Observer } from 'gsap/Observer';
 import { useReducedMotion } from 'motion/react';
-import Lenis from 'lenis';
 // @ts-ignore
 import SplitText from './content/TextAnimations/SplitText/SplitText.jsx';
 import { Utensils, Clock, Truck, Gift, Phone, CheckCircle, Sunrise, Coffee } from 'lucide-react';
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, Observer);
 
 const SERVICES = [
   {
@@ -27,7 +27,7 @@ const SERVICES = [
 
 // Clean Code: Component extraction
 const HeroFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center p-4">
+  <section className="relative w-full h-full flex flex-col items-center justify-center p-4 custom-scrollbar overflow-y-auto">
     <div className="absolute inset-0 z-0">
       <img 
         src="/assets/fold-bg-1.png" 
@@ -36,7 +36,7 @@ const HeroFold = () => (
       />
       <div className="absolute inset-0 bg-brand-text/85 backdrop-blur-[6px]"></div>
     </div>
-    <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center gap-8">
+    <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center gap-8 min-h-max py-20">
       {/* 1. Badge */}
       <div className="bg-brand-accent p-5 rounded-2xl backdrop-blur-lg shadow-lg">
         <Utensils size={40} className="text-white" aria-hidden="true" />
@@ -56,8 +56,8 @@ const HeroFold = () => (
 );
 
 const ServicesFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center bg-brand-bg px-4 overflow-y-auto custom-scrollbar py-20">
-    <div className="max-w-6xl mx-auto w-full relative z-10">
+  <section className="relative w-full h-full flex flex-col items-center justify-center bg-brand-bg px-4 overflow-y-auto custom-scrollbar">
+    <div className="max-w-6xl mx-auto w-full relative z-10 min-h-max py-20">
       <h2 className="text-5xl font-heading font-bold text-center mb-12 text-brand-text">Our Services</h2>
       
       {/* Bento Diversity */}
@@ -116,8 +116,8 @@ const ServicesFold = () => (
 );
 
 const OfferFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center p-4 bg-brand-text">
-    <div className="absolute inset-0 z-0">
+  <section className="relative w-full h-full flex flex-col items-center justify-center p-4 bg-brand-text overflow-y-auto custom-scrollbar">
+    <div className="absolute inset-0 z-0 min-h-max">
       <img 
         src="/assets/fold-bg-3.png" 
         alt="Grand Launch Offer Background" 
@@ -126,7 +126,7 @@ const OfferFold = () => (
       />
     </div>
     
-    <div className="relative z-10 max-w-4xl mx-auto w-full flex flex-col gap-8 h-full overflow-y-auto custom-scrollbar py-20 justify-center">
+    <div className="relative z-10 max-w-4xl mx-auto w-full flex flex-col gap-8 min-h-max py-20 justify-center">
       
       {/* Grand Launch Offer */}
       <div className="bg-brand-accent rounded-2xl p-10 text-brand-bg shadow-2xl flex flex-col items-center justify-center relative overflow-hidden">
@@ -190,42 +190,126 @@ const OfferFold = () => (
   </section>
 );
 
-// Canonical StickyStack from Taste-Skill (Modified for Hard-Stop Reveal)
-export function StickyStack({ cards }: { cards: React.ReactNode[] }) {
-  const ref = useRef<HTMLDivElement>(null);
+// Observer SwipeStack (Single Fold Visibility)
+export function SwipeStack({ cards }: { cards: React.ReactNode[] }) {
+  const containerRef = useRef<HTMLDivElement>(null);
+  const currentIndex = useRef(0);
+  const animating = useRef(false);
   const reduce = useReducedMotion();
 
   useEffect(() => {
-    if (reduce || !ref.current) return;
+    if (reduce || !containerRef.current) return;
+    
     const ctx = gsap.context(() => {
-      const cardEls = gsap.utils.toArray<HTMLElement>(".stack-card");
-      cardEls.forEach((card, i) => {
-        if (i === cardEls.length - 1) return;
+      const sections = gsap.utils.toArray<HTMLElement>(".swipe-card");
+      
+      // Initialize layout: stack them with decreasing z-index so 0 is on top
+      gsap.set(sections, { zIndex: (i, _target, targets) => targets.length - i });
+      
+      // Hide all except the first one and move them down
+      if (sections.length > 1) {
+        gsap.set(sections.slice(1), { autoAlpha: 0, yPercent: 100 });
+      }
+
+      const gotoSection = (index: number, direction: number) => {
+        if (animating.current) return;
+        animating.current = true;
         
-        ScrollTrigger.create({
-          trigger: card,
-          start: "top top",
-          endTrigger: cardEls[cardEls.length - 1],
-          end: "top top",
-          pin: true,
-          pinSpacing: false,
+        const currentSection = sections[currentIndex.current];
+        const targetSection = sections[index];
+        
+        // Prepare target section starting position
+        gsap.set(targetSection, {
+          yPercent: direction === 1 ? 100 : -100,
+          autoAlpha: 1
         });
         
-        // No scale or opacity animation here! 
-        // The pinned card stays at full size while the next card natively slides up over it, 
-        // creating the physical "hard-stop" curtain reveal.
+        // Animate current section away
+        gsap.to(currentSection, {
+          yPercent: direction === 1 ? -100 : 100,
+          autoAlpha: 0,
+          duration: 1.0,
+          ease: "power3.inOut"
+        });
+        
+        // Animate target section in
+        gsap.to(targetSection, {
+          yPercent: 0,
+          duration: 1.0,
+          ease: "power3.inOut",
+          onComplete: () => {
+            animating.current = false;
+          }
+        });
+        
+        currentIndex.current = index;
+      };
+
+      const intentHandler = (direction: number, observer: any) => {
+        if (animating.current) return;
+        
+        const event = observer.event;
+        // Check boundary conditions for elements with internal scrolling
+        if (event && event.target) {
+          const target = event.target as HTMLElement;
+          const scrollable = target.closest('.custom-scrollbar');
+          
+          if (scrollable) {
+            // Mobile devices might have fractional scroll values, add a 2px tolerance
+            const isAtBottom = Math.abs(scrollable.scrollHeight - scrollable.clientHeight - scrollable.scrollTop) <= 2;
+            const isAtTop = scrollable.scrollTop <= 2;
+            
+            if (direction === 1 && !isAtBottom) {
+              return; // We are scrolling down, but haven't reached the bottom of the internal container
+            }
+            if (direction === -1 && !isAtTop) {
+              return; // We are scrolling up, but haven't reached the top of the internal container
+            }
+          }
+        }
+
+        const nextIndex = currentIndex.current + direction;
+        if (nextIndex >= 0 && nextIndex < sections.length) {
+          gotoSection(nextIndex, direction);
+        }
+      };
+
+      Observer.create({
+        target: window,
+        type: "wheel,touch,pointer",
+        wheelSpeed: -1,
+        // direction 1 = next section (swipe up/scroll down)
+        // direction -1 = prev section (swipe down/scroll up)
+        onUp: (self) => intentHandler(1, self), 
+        onDown: (self) => intentHandler(-1, self),
+        tolerance: 10,
+        preventDefault: false, // Must be false to allow internal scrolling of .custom-scrollbar
       });
-    }, ref);
+      
+    }, containerRef);
+    
     return () => ctx.revert();
   }, [reduce]);
 
+  // If reduce motion is on, render them sequentially without absolute stacking
+  if (reduce) {
+    return (
+      <div className="relative w-full bg-brand-bg">
+        {cards.map((card, i) => (
+          <div key={i} className="min-h-screen w-full">
+            {card}
+          </div>
+        ))}
+      </div>
+    );
+  }
+
   return (
-    <div ref={ref} className="relative w-full bg-brand-bg">
+    <div ref={containerRef} className="relative w-full h-full bg-brand-bg overflow-hidden">
       {cards.map((card, i) => (
         <div
           key={i}
-          className="stack-card sticky top-0 min-h-[100dvh] w-full flex items-center justify-center bg-brand-bg overflow-hidden shadow-[0_-30px_60px_rgba(0,0,0,0.5)] z-10"
-          style={{ zIndex: i + 1 }}
+          className="swipe-card absolute inset-0 w-full h-full bg-brand-bg overflow-hidden"
         >
           {card}
         </div>
@@ -234,28 +318,7 @@ export function StickyStack({ cards }: { cards: React.ReactNode[] }) {
   );
 }
 
-
 function App() {
-  useEffect(() => {
-    const lenis = new Lenis({
-      duration: 1.2,
-      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
-    });
-
-    lenis.on('scroll', ScrollTrigger.update);
-
-    gsap.ticker.add((time) => {
-      lenis.raf(time * 1000);
-    });
-
-    gsap.ticker.lagSmoothing(0);
-
-    return () => {
-      lenis.destroy();
-      gsap.ticker.remove(lenis.raf);
-    };
-  }, []);
-
   const folds = [
     <HeroFold key="hero" />,
     <ServicesFold key="services" />,
@@ -263,8 +326,8 @@ function App() {
   ];
 
   return (
-    <main className="bg-brand-bg font-sans text-brand-text min-h-screen">
-      <StickyStack cards={folds} />
+    <main className="w-screen h-screen overflow-hidden bg-brand-bg font-sans text-brand-text">
+      <SwipeStack cards={folds} />
     </main>
   );
 }
