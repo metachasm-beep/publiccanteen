@@ -39,16 +39,16 @@ export const LiquidModal = ({ isOpen, onClose, children }: { isOpen: boolean, on
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
         <div 
           ref={backdropRef} 
-          className="absolute inset-0 bg-black/60 backdrop-blur-md cursor-pointer" 
+          className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm cursor-pointer" 
           onClick={onClose}
         />
         <div 
           ref={modalRef} 
-          className="relative w-full max-w-lg bg-zinc-900/60 backdrop-blur-3xl border border-white/10 rounded-3xl overflow-hidden shadow-[0_30px_60px_-15px_rgba(0,0,0,0.8)] flex flex-col"
+          className="relative w-full max-w-lg bg-white border-2 border-brand-primary rounded-3xl overflow-hidden shadow-2xl flex flex-col"
         >
           <button 
             onClick={onClose}
-            className="absolute top-4 right-4 z-20 p-2 text-zinc-400 hover:text-white bg-white/5 hover:bg-white/10 rounded-full transition-colors"
+            className="absolute top-4 right-4 z-20 p-2 text-slate-400 hover:text-brand-text bg-slate-100 hover:bg-slate-200 rounded-full transition-colors"
           >
             <X size={20} />
           </button>
@@ -63,9 +63,9 @@ LiquidModal.Header = ({ children }: { children: React.ReactNode }) => {
   const context = useContext(LiquidModalContext);
   if (!context) return null;
   return (
-    <div className="p-6 border-b border-white/10">
+    <div className="p-6 border-b border-slate-100">
       {context.isOpen && (
-        <div className="text-3xl font-heading font-black text-zinc-50">
+        <div className="text-3xl font-heading font-black text-brand-text">
           <SplitText
             text={children as string}
             delay={100}
@@ -79,13 +79,13 @@ LiquidModal.Header = ({ children }: { children: React.ReactNode }) => {
 };
 
 LiquidModal.Body = ({ children }: { children: React.ReactNode }) => (
-  <div className="p-6 text-zinc-300 font-medium leading-relaxed">
+  <div className="p-6 text-slate-600 font-sans font-medium leading-relaxed">
     {children}
   </div>
 );
 
 LiquidModal.Footer = ({ children }: { children: React.ReactNode }) => (
-  <div className="p-6 bg-black/40 border-t border-white/10 flex items-center justify-end gap-4">
+  <div className="p-6 bg-slate-50 border-t border-slate-100 flex items-center justify-end gap-4">
     {children}
   </div>
 );
@@ -187,151 +187,151 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
 );
 
 const ServicesFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto custom-scrollbar">
-    <div className="absolute inset-0 z-0">
-      <img 
-        src="/assets/fold-bg-2.png" 
-        alt="Services Background" 
-        className="w-full h-full object-cover"
-      />
-      {/* Lightened background overlay to support light glass theme */}
-      <div className="absolute inset-0 bg-zinc-900/40 mix-blend-overlay"></div>
-      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
-    </div>
+  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto bg-brand-bg text-brand-text custom-scrollbar">
     <div className="max-w-7xl mx-auto w-full relative z-10 min-h-max py-24">
-      <h2 className="text-5xl md:text-6xl font-heading font-black text-center mb-16 text-zinc-950 tracking-tight drop-shadow-md">Our Menu & Packages</h2>
+      <div className="text-center mb-16">
+        <h2 className="text-5xl md:text-6xl font-heading font-black text-brand-text tracking-tight mb-4">Our Menu & Packages</h2>
+        <p className="text-xl text-slate-500 font-sans max-w-2xl mx-auto">Flexible plans to suit your lifestyle. Cancel anytime. Zero hidden fees.</p>
+      </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-stretch">
         
-        {/* Card 1: Daily Menu (Spans 7 columns) */}
-        <div className="lg:col-span-7 bg-white/60 backdrop-blur-3xl rounded-3xl p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] flex flex-col h-full border border-white/60 relative overflow-hidden">
-          {/* subtle interior light glare */}
-          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-70"></div>
-          
-          <div className="flex items-center gap-3 mb-8 relative z-10">
-            <div className="p-3 bg-white/60 backdrop-blur-md border border-white/50 rounded-xl text-brand-accent shadow-sm">
+        {/* Block 1: Daily Menu */}
+        <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:border-brand-secondary group cursor-pointer">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-3 bg-slate-100 rounded-xl text-brand-text group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
               <Sun size={28} />
             </div>
-            <h3 className="font-heading font-bold text-3xl text-zinc-950">Daily Menu</h3>
+            <h3 className="font-heading font-bold text-3xl">Daily Menu</h3>
           </div>
           
-          <div className="space-y-8 flex-1 relative z-10">
+          <div className="space-y-8 flex-1">
             {/* Breakfast */}
-            <div>
-              <div className="flex justify-between items-baseline border-b border-zinc-950/10 pb-2 mb-3">
-                <h4 className="font-bold text-2xl text-zinc-900">Breakfast</h4>
-                <span className="font-serif font-bold text-brand-accent text-3xl drop-shadow-sm">₹100</span>
+            <div className="group/item">
+              <div className="flex justify-between items-baseline border-b border-slate-100 pb-2 mb-3">
+                <h4 className="font-bold text-xl text-brand-text font-sans">Breakfast</h4>
+                <span className="font-heading font-bold text-brand-cta text-3xl">₹100</span>
               </div>
-              <p className="text-zinc-700 mb-2 font-medium">4 Puri + Chana Masala</p>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-white/50 backdrop-blur-md border border-white/40 text-zinc-800 px-3 py-1.5 rounded-full shadow-sm">
-                <Clock size={16} /> Cooked at 6:00 AM. Never frozen.
+              <p className="text-slate-600 mb-2 font-sans font-medium">4 Puri + Chana Masala</p>
+              <div className="inline-flex items-center gap-2 text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full group-hover/item:bg-brand-secondary/10 group-hover/item:text-brand-primary transition-colors">
+                <Clock size={14} /> Cooked at 6:00 AM. Never frozen.
               </div>
             </div>
 
             {/* Lunch */}
-            <div>
-              <div className="flex justify-between items-baseline border-b border-zinc-950/10 pb-2 mb-3">
-                <h4 className="font-bold text-2xl text-zinc-900">Lunch</h4>
+            <div className="group/item">
+              <div className="flex justify-between items-baseline border-b border-slate-100 pb-2 mb-3">
+                <h4 className="font-bold text-xl text-brand-text font-sans">Lunch</h4>
               </div>
               <div className="space-y-3 mb-3">
-                <div className="flex justify-between items-center bg-white/40 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-sm transition-all duration-300 hover:bg-white/70 hover:border-brand-accent/40 hover:shadow-md cursor-default">
-                  <span className="font-semibold text-lg text-zinc-900">Veg Thali</span>
-                  <span className="font-serif font-bold text-brand-accent text-2xl drop-shadow-sm">₹125</span>
+                <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-transparent transition-all duration-300 hover:bg-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/thali">
+                  <span className="font-semibold text-lg font-sans">Veg Thali</span>
+                  <span className="font-heading font-bold text-brand-text text-2xl group-hover/thali:text-white transition-colors">₹125</span>
                 </div>
-                <div className="flex justify-between items-center bg-white/40 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-sm transition-all duration-300 hover:bg-white/70 hover:border-brand-accent/40 hover:shadow-md cursor-default">
-                  <span className="font-semibold text-lg text-zinc-900">Fish Thali</span>
-                  <span className="font-serif font-bold text-brand-accent text-2xl drop-shadow-sm">₹150</span>
+                <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-transparent transition-all duration-300 hover:bg-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/thali">
+                  <span className="font-semibold text-lg font-sans">Fish Thali</span>
+                  <span className="font-heading font-bold text-brand-text text-2xl group-hover/thali:text-white transition-colors">₹150</span>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-white/50 backdrop-blur-md border border-white/40 text-zinc-800 px-3 py-1.5 rounded-full shadow-sm">
-                <Clock size={16} /> At your door before 12:30 PM. Period.
+              <div className="inline-flex items-center gap-2 text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full group-hover/item:bg-brand-secondary/10 group-hover/item:text-brand-primary transition-colors">
+                <Clock size={14} /> At your door before 12:30 PM.
               </div>
             </div>
           </div>
         </div>
 
-        {/* Right Column Stack (Spans 5 columns) */}
-        <div className="lg:col-span-5 flex flex-col gap-8 h-full">
+        {/* Block 2: Monthly Subscriptions (Popular) */}
+        <div className="bg-white rounded-3xl p-8 shadow-2xl border-2 border-brand-primary flex flex-col h-full transform lg:-translate-y-4 relative group cursor-pointer">
+          <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-primary text-white font-bold font-sans text-sm px-6 py-2 rounded-full uppercase tracking-widest shadow-lg">
+            Most Popular
+          </div>
           
-          {/* Card 2: Monthly Subscriptions */}
-          <div className="bg-white/60 backdrop-blur-3xl rounded-3xl p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] flex flex-col border border-white/60 flex-1 relative overflow-hidden">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-70"></div>
-            
-            <div className="flex items-center gap-3 mb-6 relative z-10">
-              <div className="p-3 bg-white/60 backdrop-blur-md border border-white/50 rounded-xl text-brand-accent shadow-sm">
-                <Calendar size={28} />
-              </div>
-              <h3 className="font-heading font-bold text-2xl text-zinc-950">Monthly Plans</h3>
+          <div className="flex items-center gap-3 mb-6 mt-2">
+            <div className="p-3 bg-brand-primary/10 rounded-xl text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
+              <Calendar size={28} />
             </div>
-
-            <div className="space-y-3 flex-1 relative z-10">
-              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
-                <div className="flex flex-col">
-                  <span className="font-bold text-zinc-900">Veg Thali</span>
-                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
-                </div>
-                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹5,500</span>
-              </div>
-              
-              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
-                <div className="flex flex-col">
-                  <span className="font-bold text-zinc-900">Non-Veg Thali</span>
-                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
-                </div>
-                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹6,500</span>
-              </div>
-
-              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
-                <div className="flex flex-col">
-                  <span className="font-bold text-zinc-900">Breakfast + Meal</span>
-                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Veg Option</span>
-                </div>
-                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹4,750</span>
-              </div>
-
-              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
-                <div className="flex flex-col">
-                  <span className="font-bold text-zinc-900">Breakfast + Meal</span>
-                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Non-Veg Option</span>
-                </div>
-                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹5,750</span>
-              </div>
-            </div>
+            <h3 className="font-heading font-bold text-3xl">Monthly Plans</h3>
           </div>
 
-          {/* Card 3: Important Rules & Contact */}
-          <div className="bg-brand-accent/90 backdrop-blur-3xl rounded-3xl p-8 shadow-[0_30px_60px_-15px_rgba(225,29,72,0.4)] flex flex-col text-white relative overflow-hidden border border-white/20">
-            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-40"></div>
-            <div className="absolute -top-12 -right-12 w-40 h-40 bg-white/20 blur-3xl rounded-full"></div>
+          <p className="text-slate-500 font-sans mb-6">Save up to 20% with our automated monthly delivery. Skip any day.</p>
+
+          <div className="space-y-3 flex-1 font-sans">
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
+              <div className="flex flex-col">
+                <span className="font-bold text-lg">Veg Thali</span>
+                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Lunch & Dinner</span>
+              </div>
+              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹5,500</span>
+            </div>
             
-            <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
-              
-              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-sm">
-                <div className="flex items-center gap-2 mb-2 font-bold text-lg text-white">
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
+              <div className="flex flex-col">
+                <span className="font-bold text-lg">Non-Veg Thali</span>
+                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Lunch & Dinner</span>
+              </div>
+              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹6,500</span>
+            </div>
+
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
+              <div className="flex flex-col">
+                <span className="font-bold text-lg">Breakfast + Meal</span>
+                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Veg Option</span>
+              </div>
+              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹4,750</span>
+            </div>
+
+            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
+              <div className="flex flex-col">
+                <span className="font-bold text-lg">Breakfast + Meal</span>
+                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Non-Veg Option</span>
+              </div>
+              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹5,750</span>
+            </div>
+          </div>
+          
+          <button className="w-full mt-6 bg-brand-primary text-white font-sans font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-blue-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
+            Choose Plan
+          </button>
+        </div>
+
+        {/* Block 3: Important Rules & Contact (Dark/Premium) */}
+        <div className="bg-slate-900 rounded-3xl p-8 shadow-xl flex flex-col text-white relative overflow-hidden group cursor-pointer">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary opacity-10 rounded-full blur-3xl transform group-hover:scale-150 transition-transform duration-700"></div>
+          
+          <div className="relative z-10 flex-1 flex flex-col space-y-8">
+            <div>
+              <h3 className="font-heading font-bold text-3xl mb-2 text-white">How it Works</h3>
+              <p className="text-slate-400 font-sans">Simple rules for seamless daily delivery.</p>
+            </div>
+            
+            <div className="space-y-6 flex-1 font-sans">
+              <div className="bg-white/5 border border-white/10 p-5 rounded-2xl transition-colors hover:bg-white/10">
+                <div className="flex items-center gap-3 mb-2 font-bold text-lg text-brand-secondary">
                   <Clock size={20} /> Strict Timing
                 </div>
-                <p className="font-medium text-white/90 leading-relaxed">
-                  Order <strong className="text-white font-black drop-shadow-sm">before 9:00 PM today</strong> for tomorrow's meals.
+                <p className="text-slate-300 leading-relaxed">
+                  Order <strong className="text-white">before 9:00 PM today</strong> for tomorrow's meals.
                 </p>
               </div>
 
-              <div className="space-y-3">
-                <div className="flex items-center gap-3 font-semibold text-white/95">
-                  <ShieldCheck className="text-white flex-shrink-0" size={20} /> 
-                  Zero preservatives. Real ingredients.
+              <div className="bg-white/5 border border-white/10 p-5 rounded-2xl transition-colors hover:bg-white/10">
+                <div className="flex items-center gap-3 font-bold text-lg text-brand-secondary mb-2">
+                  <ShieldCheck size={20} /> Pure Quality
                 </div>
+                <p className="text-slate-300 leading-relaxed">
+                  Zero preservatives. Real, fresh ingredients only.
+                </p>
               </div>
-
-              <div className="pt-4 text-center">
-                <MagneticButton href="tel:9395279215" className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-md text-brand-text px-6 py-4 rounded-2xl font-black text-2xl shadow-xl transition-all duration-300 w-full justify-center border border-white hover:bg-white hover:shadow-2xl">
-                  <Phone size={24} className="text-brand-accent" />
-                  Call 9395279215
-                </MagneticButton>
-              </div>
-
             </div>
-          </div>
 
+            <div className="pt-4 text-center w-full">
+              <MagneticButton href="tel:9395279215" className="inline-flex items-center gap-3 bg-brand-cta text-white px-6 py-4 rounded-xl font-bold font-sans text-xl shadow-lg transition-all duration-300 w-full justify-center hover:bg-orange-600 hover:shadow-xl">
+                <Phone size={24} />
+                Call 9395279215
+              </MagneticButton>
+            </div>
+
+          </div>
         </div>
 
       </div>

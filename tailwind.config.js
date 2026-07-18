@@ -8,16 +8,17 @@ export default {
     extend: {
       colors: {
         brand: {
-          bg: '#fafafa', // zinc-50
-          text: '#09090b', // zinc-950
-          accent: '#e11d48', // rose-600
-          accentHover: '#be123c', // rose-700
+          bg: '#F8FAFC',
+          text: '#1E293B',
+          primary: '#3B82F6',
+          secondary: '#60A5FA',
+          cta: '#F97316',
         }
       },
       fontFamily: {
-        heading: ['Outfit', 'sans-serif'],
-        sans: ['Inter', 'sans-serif'],
-        serif: ['Playfair Display', 'serif'],
+        heading: ['"Playfair Display SC"', 'serif'],
+        sans: ['Karla', 'sans-serif'],
+        serif: ['"Playfair Display SC"', 'serif'],
       }
     },
   },
