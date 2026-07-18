@@ -6,7 +6,7 @@ import { Observer } from 'gsap/Observer';
 import { useReducedMotion } from 'motion/react';
 // @ts-ignore
 import SplitText from './content/TextAnimations/SplitText/SplitText.jsx';
-import { Utensils, Clock, Gift, Phone, ShieldCheck, Sun, Calendar, X } from 'lucide-react';
+import { Utensils, Gift, Phone, X } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
@@ -187,159 +187,75 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
 );
 
 const ServicesFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto bg-brand-bg text-brand-text custom-scrollbar">
-    <div className="absolute inset-0 z-0">
-      <img 
-        src="/assets/fold-bg-2.png" 
-        alt="Services Background" 
-        className="w-full h-full object-cover opacity-60"
-      />
-      <div className="absolute inset-0 bg-slate-50/80 backdrop-blur-md"></div>
-    </div>
+  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto bg-slate-50 text-slate-900 custom-scrollbar">
     <div className="max-w-6xl mx-auto w-full relative z-10 min-h-max py-24">
-      <div className="text-center mb-16">
-        <h2 className="text-5xl md:text-6xl font-heading font-black text-brand-text tracking-tight mb-4">Our Menu & Packages</h2>
-        <p className="text-xl text-slate-500 font-sans max-w-2xl mx-auto">Flexible plans to suit your lifestyle. Cancel anytime. Zero hidden fees.</p>
+      <div className="mb-12">
+        <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tight mb-3">Select your plan.</h2>
+        <p className="text-lg text-slate-600 font-sans max-w-[65ch]">Flexible options to suit your lifestyle. Cancel anytime. Zero hidden fees.</p>
       </div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-12 items-stretch">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
         
-        {/* Block 1: Daily Menu */}
-        <div className="bg-white rounded-3xl p-8 shadow-sm border border-slate-200 flex flex-col h-full transition-all duration-300 hover:shadow-xl hover:border-brand-secondary group cursor-pointer">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-slate-100 rounded-xl text-brand-text group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
-              <Sun size={28} />
-            </div>
-            <h3 className="font-heading font-bold text-3xl">Daily Menu</h3>
-          </div>
+        {/* Cell 1: Monthly (Large, Photographic) */}
+        <div className="relative col-span-1 lg:col-span-2 bg-slate-900 rounded-[2rem] p-8 md:p-12 overflow-hidden group flex flex-col justify-end min-h-[450px]">
+          <img src="/assets/fold-bg-2.png" alt="Fresh meals" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-700" />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
           
-          <div className="space-y-8 flex-1">
-            {/* Breakfast */}
-            <div className="group/item">
-              <div className="flex justify-between items-baseline border-b border-slate-100 pb-2 mb-3">
-                <h4 className="font-bold text-xl text-brand-text font-sans">Breakfast</h4>
-                <span className="font-heading font-bold text-brand-cta text-3xl">₹100</span>
+          <div className="relative z-10 text-white mt-auto pt-32">
+            <h3 className="font-heading text-4xl mb-4">Monthly Subscriptions</h3>
+            <p className="text-slate-300 max-w-[45ch] mb-8 leading-relaxed font-sans text-lg">
+              Save up to 20% with our automated monthly delivery. 60 meals delivered fresh. Skip any day.
+            </p>
+            <div className="grid grid-cols-2 gap-4 max-w-sm mb-8">
+              <div>
+                <div className="text-white/50 text-xs uppercase tracking-wider mb-1 font-bold">Veg Thali</div>
+                <div className="font-heading text-2xl text-brand-cta">₹5,500</div>
               </div>
-              <p className="text-slate-600 mb-2 font-sans font-medium">4 Puri + Chana Masala</p>
-              <div className="inline-flex items-center gap-2 text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full group-hover/item:bg-brand-secondary/10 group-hover/item:text-brand-primary transition-colors">
-                <Clock size={14} /> Cooked at 6:00 AM. Never frozen.
+              <div>
+                <div className="text-white/50 text-xs uppercase tracking-wider mb-1 font-bold">Non-Veg Thali</div>
+                <div className="font-heading text-2xl text-brand-cta">₹6,500</div>
               </div>
             </div>
+            <button className="bg-white text-slate-900 px-8 py-3.5 rounded-full font-bold font-sans transition-transform duration-200 active:scale-95 hover:bg-slate-100 inline-block">
+              Choose Monthly Plan
+            </button>
+          </div>
+        </div>
 
-            {/* Lunch */}
-            <div className="group/item">
-              <div className="flex justify-between items-baseline border-b border-slate-100 pb-2 mb-3">
-                <h4 className="font-bold text-xl text-brand-text font-sans">Lunch</h4>
-              </div>
-              <div className="space-y-3 mb-3">
-                <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-transparent transition-all duration-300 hover:bg-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/thali">
-                  <span className="font-semibold text-lg font-sans">Veg Thali</span>
-                  <span className="font-heading font-bold text-brand-text text-2xl group-hover/thali:text-white transition-colors">₹125</span>
-                </div>
-                <div className="flex justify-between items-center bg-slate-50 p-4 rounded-xl border border-transparent transition-all duration-300 hover:bg-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/thali">
-                  <span className="font-semibold text-lg font-sans">Fish Thali</span>
-                  <span className="font-heading font-bold text-brand-text text-2xl group-hover/thali:text-white transition-colors">₹150</span>
-                </div>
-              </div>
-              <div className="inline-flex items-center gap-2 text-xs font-bold bg-slate-100 text-slate-700 px-3 py-1.5 rounded-full group-hover/item:bg-brand-secondary/10 group-hover/item:text-brand-primary transition-colors">
-                <Clock size={14} /> At your door before 12:30 PM.
-              </div>
+        {/* Cell 2: Daily (Small, Solid Brand) */}
+        <div className="col-span-1 lg:col-span-1 bg-brand-primary rounded-[2rem] p-8 md:p-10 flex flex-col text-white">
+          <h3 className="font-heading text-3xl mb-4">Daily Menu</h3>
+          <p className="text-blue-100 mb-10 font-sans leading-relaxed">
+            Order before 9:00 PM today for tomorrow's meals. Delivered hot and fresh.
+          </p>
+          <div className="space-y-6 flex-1 font-sans">
+            <div className="border-l-2 border-blue-400/50 pl-5">
+              <div className="font-bold text-xl mb-1">Breakfast</div>
+              <div className="text-blue-200 text-sm">₹100 · 4 Puri + Chana</div>
+            </div>
+            <div className="border-l-2 border-blue-400/50 pl-5">
+              <div className="font-bold text-xl mb-1">Veg Lunch</div>
+              <div className="text-blue-200 text-sm">₹125 · Full Thali</div>
+            </div>
+            <div className="border-l-2 border-blue-400/50 pl-5">
+              <div className="font-bold text-xl mb-1">Fish Lunch</div>
+              <div className="text-blue-200 text-sm">₹150 · Full Thali</div>
             </div>
           </div>
         </div>
 
-        {/* Block 2: Monthly Subscriptions (Popular) */}
-        <div className="bg-white rounded-3xl p-8 shadow-2xl border-2 border-brand-primary flex flex-col h-full transform lg:-translate-y-4 relative group cursor-pointer">
-          <div className="absolute -top-5 left-1/2 -translate-x-1/2 bg-brand-primary text-white font-bold font-sans text-sm px-6 py-2 rounded-full uppercase tracking-widest shadow-lg">
-            Most Popular
+        {/* Cell 3: Contact/Rules (Full width pill-like) */}
+        <div className="col-span-1 lg:col-span-3 bg-white border border-slate-200 rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
+          <div>
+            <h3 className="font-heading text-2xl mb-3 text-slate-900">How it Works</h3>
+            <p className="text-slate-500 font-sans max-w-[55ch] leading-relaxed">
+              Zero preservatives. Real, fresh ingredients only. Our kitchen operates with strict hygiene standards to bring you home-style meals daily.
+            </p>
           </div>
-          
-          <div className="flex items-center gap-3 mb-6 mt-2">
-            <div className="p-3 bg-brand-primary/10 rounded-xl text-brand-primary group-hover:bg-brand-primary group-hover:text-white transition-colors duration-300">
-              <Calendar size={28} />
-            </div>
-            <h3 className="font-heading font-bold text-3xl">Monthly Plans</h3>
-          </div>
-
-          <p className="text-slate-500 font-sans mb-6">Save up to 20% with our automated monthly delivery. Skip any day.</p>
-
-          <div className="space-y-3 flex-1 font-sans">
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
-              <div className="flex flex-col">
-                <span className="font-bold text-lg">Veg Thali</span>
-                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Lunch & Dinner</span>
-              </div>
-              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹5,500</span>
-            </div>
-            
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
-              <div className="flex flex-col">
-                <span className="font-bold text-lg">Non-Veg Thali</span>
-                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Lunch & Dinner</span>
-              </div>
-              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹6,500</span>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
-              <div className="flex flex-col">
-                <span className="font-bold text-lg">Breakfast + Meal</span>
-                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Veg Option</span>
-              </div>
-              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹4,750</span>
-            </div>
-
-            <div className="bg-slate-50 p-4 rounded-xl border border-slate-100 flex justify-between items-center transition-all duration-300 hover:bg-brand-primary hover:border-brand-primary hover:text-white hover:shadow-lg cursor-pointer group/plan">
-              <div className="flex flex-col">
-                <span className="font-bold text-lg">Breakfast + Meal</span>
-                <span className="text-slate-500 text-xs font-bold uppercase tracking-wider group-hover/plan:text-blue-100 transition-colors">Non-Veg Option</span>
-              </div>
-              <span className="font-heading font-bold text-brand-cta text-2xl group-hover/plan:text-white transition-colors">₹5,750</span>
-            </div>
-          </div>
-          
-          <button className="w-full mt-6 bg-brand-primary text-white font-sans font-bold text-lg py-4 rounded-xl shadow-lg hover:bg-blue-600 hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1">
-            Choose Plan
-          </button>
-        </div>
-
-        {/* Block 3: Important Rules & Contact (Dark/Premium) */}
-        <div className="bg-slate-900 rounded-3xl p-8 shadow-xl flex flex-col text-white relative overflow-hidden group cursor-pointer">
-          <div className="absolute top-0 right-0 w-64 h-64 bg-brand-primary opacity-10 rounded-full blur-3xl transform group-hover:scale-150 transition-transform duration-700"></div>
-          
-          <div className="relative z-10 flex-1 flex flex-col space-y-8">
-            <div>
-              <h3 className="font-heading font-bold text-3xl mb-2 text-white">How it Works</h3>
-              <p className="text-slate-400 font-sans">Simple rules for seamless daily delivery.</p>
-            </div>
-            
-            <div className="space-y-6 flex-1 font-sans">
-              <div className="bg-white/5 border border-white/10 p-5 rounded-2xl transition-colors hover:bg-white/10">
-                <div className="flex items-center gap-3 mb-2 font-bold text-lg text-brand-secondary">
-                  <Clock size={20} /> Strict Timing
-                </div>
-                <p className="text-slate-300 leading-relaxed">
-                  Order <strong className="text-white">before 9:00 PM today</strong> for tomorrow's meals.
-                </p>
-              </div>
-
-              <div className="bg-white/5 border border-white/10 p-5 rounded-2xl transition-colors hover:bg-white/10">
-                <div className="flex items-center gap-3 font-bold text-lg text-brand-secondary mb-2">
-                  <ShieldCheck size={20} /> Pure Quality
-                </div>
-                <p className="text-slate-300 leading-relaxed">
-                  Zero preservatives. Real, fresh ingredients only.
-                </p>
-              </div>
-            </div>
-
-            <div className="pt-4 text-center w-full">
-              <MagneticButton href="tel:9395279215" className="inline-flex items-center gap-3 bg-brand-cta text-white px-6 py-4 rounded-xl font-bold font-sans text-xl shadow-lg transition-all duration-300 w-full justify-center hover:bg-orange-600 hover:shadow-xl">
-                <Phone size={24} />
-                Call 9395279215
-              </MagneticButton>
-            </div>
-
-          </div>
+          <MagneticButton href="tel:9395279215" className="shrink-0 inline-flex items-center gap-3 bg-brand-cta text-white px-8 py-4 rounded-full font-bold font-sans text-lg shadow-lg transition-transform duration-200 active:scale-95 hover:bg-orange-600">
+            <Phone size={20} />
+            Call 9395279215
+          </MagneticButton>
         </div>
 
       </div>
