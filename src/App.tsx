@@ -190,7 +190,7 @@ const OfferFold = () => (
   </section>
 );
 
-// Canonical StickyStack from Taste-Skill
+// Canonical StickyStack from Taste-Skill (Modified for Hard-Stop Reveal)
 export function StickyStack({ cards }: { cards: React.ReactNode[] }) {
   const ref = useRef<HTMLDivElement>(null);
   const reduce = useReducedMotion();
@@ -211,17 +211,9 @@ export function StickyStack({ cards }: { cards: React.ReactNode[] }) {
           pinSpacing: false,
         });
         
-        gsap.to(card, {
-          scale: 0.92,
-          opacity: 0,
-          ease: "none",
-          scrollTrigger: {
-            trigger: cardEls[i + 1],
-            start: "top bottom",
-            end: "top top",
-            scrub: true,
-          },
-        });
+        // No scale or opacity animation here! 
+        // The pinned card stays at full size while the next card natively slides up over it, 
+        // creating the physical "hard-stop" curtain reveal.
       });
     }, ref);
     return () => ctx.revert();
@@ -232,7 +224,7 @@ export function StickyStack({ cards }: { cards: React.ReactNode[] }) {
       {cards.map((card, i) => (
         <div
           key={i}
-          className="stack-card sticky top-0 min-h-[100dvh] w-full flex items-center justify-center bg-brand-bg overflow-hidden shadow-[0_-10px_40px_rgba(0,0,0,0.15)]"
+          className="stack-card sticky top-0 min-h-[100dvh] w-full flex items-center justify-center bg-brand-bg overflow-hidden shadow-[0_-30px_60px_rgba(0,0,0,0.5)] z-10"
           style={{ zIndex: i + 1 }}
         >
           {card}
