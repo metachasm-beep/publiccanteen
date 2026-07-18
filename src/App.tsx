@@ -34,7 +34,8 @@ const HeroFold = () => (
         alt="Hero Background showing fresh restaurant food" 
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-brand-text/85 backdrop-blur-[6px]"></div>
+      {/* Light overlay for text contrast, no heavy blur or opacity */}
+      <div className="absolute inset-0 bg-black/40"></div>
     </div>
     <div className="relative z-10 text-center max-w-4xl mx-auto flex flex-col items-center gap-8 min-h-max py-20">
       {/* 1. Badge */}
@@ -43,12 +44,12 @@ const HeroFold = () => (
       </div>
       
       {/* 2. Headline */}
-      <h1 className="text-6xl md:text-8xl font-heading font-black text-brand-bg tracking-tighter leading-none">
+      <h1 className="text-6xl md:text-8xl font-heading font-black text-white tracking-tighter leading-none">
         <SplitText text="PUBLIC CANTEEN" delay={50} className="inline-block" />
       </h1>
       
       {/* 3. Subtext (concrete, 20 words) */}
-      <p className="text-xl md:text-2xl text-brand-bg/90 max-w-xl font-medium leading-relaxed">
+      <p className="text-xl md:text-2xl text-white max-w-xl font-medium leading-relaxed">
         Daily home-style meals, prepared fresh and delivered across your neighborhood.
       </p>
     </div>
@@ -56,9 +57,17 @@ const HeroFold = () => (
 );
 
 const ServicesFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center bg-brand-bg px-4 overflow-y-auto custom-scrollbar">
+  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto custom-scrollbar">
+    <div className="absolute inset-0 z-0">
+      <img 
+        src="/assets/fold-bg-2.png" 
+        alt="Services Background" 
+        className="w-full h-full object-cover"
+      />
+      <div className="absolute inset-0 bg-black/40"></div>
+    </div>
     <div className="max-w-6xl mx-auto w-full relative z-10 min-h-max py-20">
-      <h2 className="text-5xl font-heading font-bold text-center mb-12 text-brand-text">Our Services</h2>
+      <h2 className="text-5xl font-heading font-bold text-center mb-12 text-white">Our Services</h2>
       
       {/* Bento Diversity */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
@@ -66,7 +75,7 @@ const ServicesFold = () => (
         {/* Card 1: Full-bleed image with overlay */}
         <div className="group relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3] lg:aspect-auto lg:h-[400px]">
           <img src={SERVICES[0].img} alt={SERVICES[0].alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-brand-text/90 via-brand-text/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
           <div className="absolute inset-0 p-8 flex flex-col justify-end">
             <ul className="space-y-4">
               {SERVICES[0].items.map((item, idx) => (
@@ -80,7 +89,7 @@ const ServicesFold = () => (
         </div>
 
         {/* Card 2: Tinted Background */}
-        <div className="group rounded-2xl overflow-hidden shadow-xl bg-brand-accent/5 border border-brand-accent/10 flex flex-col h-auto lg:h-[400px]">
+        <div className="group rounded-2xl overflow-hidden shadow-xl bg-brand-bg flex flex-col h-auto lg:h-[400px]">
           <div className="p-6 pb-0">
              <img src={SERVICES[1].img} alt={SERVICES[1].alt} loading="lazy" className="w-full h-48 object-cover rounded-2xl shadow-sm" />
           </div>
@@ -97,7 +106,7 @@ const ServicesFold = () => (
         </div>
 
         {/* Card 3: Clean White Card */}
-        <div className="group rounded-2xl overflow-hidden shadow-xl bg-white border border-zinc-200 flex flex-col h-auto lg:h-[400px]">
+        <div className="group rounded-2xl overflow-hidden shadow-xl bg-white flex flex-col h-auto lg:h-[400px]">
           <img src="/assets/img3.jpeg" alt="Delivery person ensuring timely delivery" loading="lazy" className="w-full h-56 object-cover" />
           <div className="p-8 flex-1 flex flex-col justify-center">
             <div className="flex items-start gap-4">
@@ -116,15 +125,17 @@ const ServicesFold = () => (
 );
 
 const OfferFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center p-4 bg-brand-text overflow-y-auto custom-scrollbar">
-    <div className="absolute inset-0 z-0 min-h-max">
+  <section className="relative w-full h-full flex flex-col items-center justify-center p-4 overflow-y-auto custom-scrollbar">
+    <div className="absolute inset-0 z-0">
       <img 
         src="/assets/fold-bg-3.png" 
         alt="Grand Launch Offer Background" 
-        className="w-full h-full object-cover opacity-20 grayscale"
+        className="w-full h-full object-cover"
         loading="lazy"
       />
+      <div className="absolute inset-0 bg-black/40"></div>
     </div>
+
     
     <div className="relative z-10 max-w-4xl mx-auto w-full flex flex-col gap-8 min-h-max py-20 justify-center">
       
