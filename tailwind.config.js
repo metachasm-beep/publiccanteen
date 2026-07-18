@@ -7,15 +7,17 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-red': '#DC2626',
-        'brand-light': '#FEF2F2',
-        'brand-gold': '#CA8A04',
-        'brand-brown': '#450A0A',
+        brand: {
+          bg: '#fafafa', // zinc-50
+          text: '#09090b', // zinc-950
+          accent: '#e11d48', // rose-600
+          accentHover: '#be123c', // rose-700
+        }
       },
       fontFamily: {
-        sans: ['Karla', 'sans-serif'],
-        heading: ['Playfair Display SC', 'serif'],
-      },
+        heading: ['Outfit', 'sans-serif'],
+        sans: ['Inter', 'sans-serif'],
+      }
     },
   },
   plugins: [],
