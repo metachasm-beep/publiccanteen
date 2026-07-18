@@ -7,13 +7,14 @@ export default {
   theme: {
     extend: {
       colors: {
-        'brand-green': '#2ecc71',
-        'brand-orange': '#f39c12',
-        'brand-dark': '#2c3e50',
-        'brand-light': '#ecf0f1',
+        'brand-red': '#DC2626',
+        'brand-light': '#FEF2F2',
+        'brand-gold': '#CA8A04',
+        'brand-brown': '#450A0A',
       },
       fontFamily: {
-        sans: ['Inter', 'sans-serif'],
+        sans: ['Karla', 'sans-serif'],
+        heading: ['Playfair Display SC', 'serif'],
       },
     },
   },

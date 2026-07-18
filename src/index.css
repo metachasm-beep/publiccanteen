@@ -1,16 +1,19 @@
 @import "tailwindcss";
 
 @theme {
-  --color-brand-green: #2ecc71;
-  --color-brand-orange: #f39c12;
-  --color-brand-dark: #2c3e50;
-  --color-brand-light: #ecf0f1;
+  --color-brand-red: #DC2626;
+  --color-brand-light: #FEF2F2;
+  --color-brand-gold: #CA8A04;
+  --color-brand-brown: #450A0A;
+  
+  --font-heading: 'Playfair Display SC', serif;
+  --font-sans: 'Karla', sans-serif;
 }
 
 @layer base {
   body {
     background-color: var(--color-brand-light);
-    color: var(--color-brand-dark);
-    font-family: Inter, sans-serif;
+    color: var(--color-brand-brown);
+    font-family: var(--font-sans);
   }
 }
