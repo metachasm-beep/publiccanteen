@@ -17,6 +17,7 @@ export default {
       fontFamily: {
         heading: ['Outfit', 'sans-serif'],
         sans: ['Inter', 'sans-serif'],
+        serif: ['Playfair Display', 'serif'],
       }
     },
   },

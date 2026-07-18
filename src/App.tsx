@@ -6,13 +6,59 @@ import { Observer } from 'gsap/Observer';
 import { useReducedMotion } from 'motion/react';
 // @ts-ignore
 import SplitText from './content/TextAnimations/SplitText/SplitText.jsx';
-import { Utensils, Clock, Truck, Gift, Phone, CheckCircle, Sunrise, Coffee, Calendar, ShieldCheck, Sun, Info } from 'lucide-react';
+import { Utensils, Clock, Gift, Phone, ShieldCheck, Sun, Calendar, Sunrise, Coffee } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
 
 
 // Clean Code: Component extraction
+const MagneticButton = ({ children, href }: { children: React.ReactNode, href: string }) => {
+  const buttonRef = useRef<HTMLAnchorElement>(null);
+
+  useEffect(() => {
+    const btn = buttonRef.current;
+    if (!btn) return;
+
+    const xTo = gsap.quickTo(btn, "x", { duration: 1, ease: "elastic.out(1, 0.3)" });
+    const yTo = gsap.quickTo(btn, "y", { duration: 1, ease: "elastic.out(1, 0.3)" });
+
+    const handleMouseMove = (e: MouseEvent) => {
+      const { clientX, clientY } = e;
+      const { height, width, left, top } = btn.getBoundingClientRect();
+      const x = clientX - (left + width / 2);
+      const y = clientY - (top + height / 2);
+      
+      // limit the magnetic strength
+      xTo(x * 0.4);
+      yTo(y * 0.4);
+    };
+
+    const handleMouseLeave = () => {
+      xTo(0);
+      yTo(0);
+    };
+
+    btn.addEventListener("mousemove", handleMouseMove);
+    btn.addEventListener("mouseleave", handleMouseLeave);
+
+    return () => {
+      btn.removeEventListener("mousemove", handleMouseMove);
+      btn.removeEventListener("mouseleave", handleMouseLeave);
+    };
+  }, []);
+
+  return (
+    <a 
+      ref={buttonRef} 
+      href={href} 
+      className="inline-flex items-center gap-3 bg-zinc-950 text-zinc-50 px-6 py-4 rounded-2xl font-black text-2xl shadow-xl transition-colors w-full justify-center border border-transparent hover:border-brand-accent/50"
+    >
+      {children}
+    </a>
+  );
+};
+
 const HeroFold = () => (
   <section className="relative w-full h-full flex flex-col items-center justify-center p-4 custom-scrollbar overflow-y-auto">
     <div className="absolute inset-0 z-0">
@@ -56,151 +102,139 @@ const ServicesFold = () => (
     <div className="max-w-7xl mx-auto w-full relative z-10 min-h-max py-24">
       <h2 className="text-5xl md:text-6xl font-heading font-black text-center mb-16 text-white tracking-tight">Our Menu & Packages</h2>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
-        {/* Card 1: Daily Menu */}
-        <div className="bg-brand-bg/95 backdrop-blur-xl rounded-3xl p-8 shadow-2xl flex flex-col h-full border border-white/10">
+        {/* Card 1: Daily Menu (Spans 7 columns) */}
+        <div className="lg:col-span-7 bg-zinc-50 rounded-3xl p-8 shadow-2xl flex flex-col h-full border border-brand-accent/20">
           <div className="flex items-center gap-3 mb-8">
             <div className="p-3 bg-brand-accent/10 rounded-xl text-brand-accent">
               <Sun size={28} />
             </div>
-            <h3 className="font-heading font-bold text-3xl text-brand-text">Daily Menu</h3>
+            <h3 className="font-heading font-bold text-3xl text-zinc-950">Daily Menu</h3>
           </div>
           
           <div className="space-y-8 flex-1">
             {/* Breakfast */}
             <div>
               <div className="flex justify-between items-baseline border-b border-zinc-200 pb-2 mb-3">
-                <h4 className="font-bold text-xl text-brand-text">Breakfast</h4>
-                <span className="font-bold text-brand-accent text-xl">₹100</span>
+                <h4 className="font-bold text-2xl text-zinc-900">Breakfast</h4>
+                <span className="font-serif font-bold text-brand-accent text-3xl">₹100</span>
               </div>
-              <p className="text-zinc-600 mb-2">4 Puri + Chana Masala</p>
-              <div className="inline-flex items-center gap-2 text-xs font-semibold bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-full">
-                <Clock size={14} /> Delivery: 7:00 AM - 7:30 AM
+              <p className="text-zinc-600 mb-2 font-medium">4 Puri + Chana Masala</p>
+              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-zinc-200 text-zinc-800 px-3 py-1.5 rounded-full">
+                <Clock size={16} /> Cooked at 6:00 AM. Never frozen.
               </div>
             </div>
 
             {/* Lunch */}
             <div>
               <div className="flex justify-between items-baseline border-b border-zinc-200 pb-2 mb-3">
-                <h4 className="font-bold text-xl text-brand-text">Lunch</h4>
+                <h4 className="font-bold text-2xl text-zinc-900">Lunch</h4>
               </div>
               <div className="space-y-3 mb-3">
-                <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-zinc-100 shadow-sm">
-                  <span className="font-semibold text-zinc-800">Veg Thali</span>
-                  <span className="font-bold text-brand-accent">₹125</span>
+                <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-zinc-200 shadow-sm transition-colors hover:border-brand-accent/40">
+                  <span className="font-semibold text-lg text-zinc-900">Veg Thali</span>
+                  <span className="font-serif font-bold text-brand-accent text-2xl">₹125</span>
                 </div>
-                <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-zinc-100 shadow-sm">
-                  <span className="font-semibold text-zinc-800">Fish Thali</span>
-                  <span className="font-bold text-brand-accent">₹150</span>
+                <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-zinc-200 shadow-sm transition-colors hover:border-brand-accent/40">
+                  <span className="font-semibold text-lg text-zinc-900">Fish Thali</span>
+                  <span className="font-serif font-bold text-brand-accent text-2xl">₹150</span>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-2 text-xs font-semibold bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-full">
-                <Clock size={14} /> Delivery: 12:00 PM - 12:30 PM
+              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-zinc-200 text-zinc-800 px-3 py-1.5 rounded-full">
+                <Clock size={16} /> At your door before 12:30 PM. Period.
               </div>
             </div>
           </div>
         </div>
 
-        {/* Card 2: Monthly Subscriptions */}
-        <div className="bg-brand-accent rounded-3xl p-8 shadow-2xl flex flex-col h-full text-white relative overflow-hidden">
-          {/* subtle decorative blur */}
-          <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/20 blur-3xl rounded-full"></div>
+        {/* Right Column Stack (Spans 5 columns) */}
+        <div className="lg:col-span-5 flex flex-col gap-8 h-full">
           
-          <div className="relative z-10 flex flex-col h-full">
-            <div className="flex items-center gap-3 mb-8">
-              <div className="p-3 bg-white/20 rounded-xl text-white backdrop-blur-sm">
+          {/* Card 2: Monthly Subscriptions */}
+          <div className="bg-zinc-50 rounded-3xl p-8 shadow-2xl flex flex-col border border-brand-accent/20 flex-1">
+            <div className="flex items-center gap-3 mb-6">
+              <div className="p-3 bg-zinc-200 rounded-xl text-zinc-900">
                 <Calendar size={28} />
               </div>
-              <h3 className="font-heading font-bold text-3xl">Monthly Plans</h3>
+              <h3 className="font-heading font-bold text-2xl text-zinc-950">Monthly Plans</h3>
             </div>
 
-            <div className="space-y-4 flex-1">
-              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="font-bold text-lg">Veg Thali</span>
-                  <span className="font-bold text-xl">₹5,500</span>
+            <div className="space-y-3 flex-1">
+              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+                <div className="flex flex-col">
+                  <span className="font-bold text-zinc-900">Veg Thali</span>
+                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
                 </div>
-                <span className="text-white/80 text-sm font-medium">Lunch & Dinner (2x Daily)</span>
+                <span className="font-serif font-bold text-brand-accent text-xl">₹5,500</span>
               </div>
               
-              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="font-bold text-lg">Non-Veg Thali</span>
-                  <span className="font-bold text-xl">₹6,500</span>
+              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+                <div className="flex flex-col">
+                  <span className="font-bold text-zinc-900">Non-Veg Thali</span>
+                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
                 </div>
-                <span className="text-white/80 text-sm font-medium">Lunch & Dinner (2x Daily)</span>
+                <span className="font-serif font-bold text-brand-accent text-xl">₹6,500</span>
               </div>
 
-              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="font-bold text-lg">Breakfast + 1 Meal</span>
-                  <span className="font-bold text-xl">₹4,750</span>
+              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+                <div className="flex flex-col">
+                  <span className="font-bold text-zinc-900">Breakfast + Meal</span>
+                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Veg Option</span>
                 </div>
-                <span className="text-white/80 text-sm font-medium">Veg Option</span>
+                <span className="font-serif font-bold text-brand-accent text-xl">₹4,750</span>
               </div>
 
-              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
-                <div className="flex justify-between items-start mb-1">
-                  <span className="font-bold text-lg">Breakfast + 1 Meal</span>
-                  <span className="font-bold text-xl">₹5,750</span>
+              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+                <div className="flex flex-col">
+                  <span className="font-bold text-zinc-900">Breakfast + Meal</span>
+                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Non-Veg Option</span>
                 </div>
-                <span className="text-white/80 text-sm font-medium">Non-Veg Option</span>
+                <span className="font-serif font-bold text-brand-accent text-xl">₹5,750</span>
               </div>
             </div>
           </div>
-        </div>
 
-        {/* Card 3: Important Rules & Contact */}
-        <div className="bg-brand-bg/95 backdrop-blur-xl rounded-3xl p-8 shadow-2xl flex flex-col h-full border border-white/10">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-zinc-900 rounded-xl text-white">
-              <Info size={28} />
-            </div>
-            <h3 className="font-heading font-bold text-3xl text-brand-text">How to Order</h3>
-          </div>
-
-          <div className="flex-1 flex flex-col justify-between space-y-6">
+          {/* Card 3: Important Rules & Contact */}
+          <div className="bg-brand-accent rounded-3xl p-8 shadow-2xl flex flex-col text-white relative overflow-hidden">
+            <div className="absolute -top-12 -right-12 w-40 h-40 bg-white/20 blur-3xl rounded-full"></div>
             
-            <div className="bg-brand-accent/10 border border-brand-accent/20 p-5 rounded-2xl text-brand-accent">
-              <div className="flex items-center gap-2 mb-2 font-bold text-lg">
-                <Clock size={20} /> Strict Order Timing
+            <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
+              
+              <div className="bg-black/20 backdrop-blur-sm border border-white/20 p-5 rounded-2xl">
+                <div className="flex items-center gap-2 mb-2 font-bold text-lg">
+                  <Clock size={20} /> Strict Timing
+                </div>
+                <p className="font-medium text-white/90 leading-relaxed">
+                  Order <strong className="text-white font-black">before 9:00 PM today</strong> for tomorrow's meals.
+                </p>
               </div>
-              <p className="font-medium text-brand-text leading-relaxed">
-                You must place your order <strong className="text-brand-accent font-black">before 9:00 PM today</strong> for tomorrow's breakfast and lunch.
-              </p>
+
+              <div className="space-y-3">
+                <div className="flex items-center gap-3 font-semibold">
+                  <ShieldCheck className="text-white flex-shrink-0" size={20} /> 
+                  Zero preservatives. Real ingredients.
+                </div>
+              </div>
+
+              <div className="pt-4 text-center">
+                <MagneticButton href="tel:9395279215">
+                  <Phone size={24} className="text-brand-accent" />
+                  Call 9395279215
+                </MagneticButton>
+              </div>
+
             </div>
-
-            <ul className="space-y-4">
-              <li className="flex items-center gap-3 text-zinc-700 font-medium">
-                <ShieldCheck className="text-brand-accent flex-shrink-0" size={20} /> 
-                Fresh & Hygienic Home-Style Food
-              </li>
-              <li className="flex items-center gap-3 text-zinc-700 font-medium">
-                <CheckCircle className="text-brand-accent flex-shrink-0" size={20} /> 
-                High Nutritional Value
-              </li>
-              <li className="flex items-center gap-3 text-zinc-700 font-medium">
-                <Truck className="text-brand-accent flex-shrink-0" size={20} /> 
-                Always On-Time Delivery
-              </li>
-            </ul>
-
-            <div className="pt-6 border-t border-zinc-200 text-center">
-              <p className="text-zinc-500 font-medium mb-3 text-sm uppercase tracking-widest">Call for orders & enquiries</p>
-              <a href="tel:9395279215" className="inline-flex items-center gap-3 bg-zinc-900 text-white px-6 py-4 rounded-2xl font-black text-2xl shadow-xl hover:bg-zinc-800 active:scale-[0.98] transition-all w-full justify-center">
-                <Phone size={24} className="text-brand-accent" />
-                9395279215
-              </a>
-            </div>
-
           </div>
+
         </div>
 
       </div>
     </div>
   </section>
 );
+
+
 
 const OfferFold = () => (
   <section className="relative w-full h-full flex flex-col items-center justify-center p-4 overflow-y-auto custom-scrollbar">
