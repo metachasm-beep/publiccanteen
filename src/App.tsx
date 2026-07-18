@@ -194,51 +194,56 @@ const ServicesFold = () => (
         alt="Services Background" 
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/60"></div>
+      {/* Lightened background overlay to support light glass theme */}
+      <div className="absolute inset-0 bg-zinc-900/40 mix-blend-overlay"></div>
+      <div className="absolute inset-0 bg-white/20 backdrop-blur-sm"></div>
     </div>
     <div className="max-w-7xl mx-auto w-full relative z-10 min-h-max py-24">
-      <h2 className="text-5xl md:text-6xl font-heading font-black text-center mb-16 text-white tracking-tight">Our Menu & Packages</h2>
+      <h2 className="text-5xl md:text-6xl font-heading font-black text-center mb-16 text-zinc-950 tracking-tight drop-shadow-md">Our Menu & Packages</h2>
       
       <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
         
         {/* Card 1: Daily Menu (Spans 7 columns) */}
-        <div className="lg:col-span-7 bg-zinc-50 rounded-3xl p-8 shadow-2xl flex flex-col h-full border border-brand-accent/20">
-          <div className="flex items-center gap-3 mb-8">
-            <div className="p-3 bg-brand-accent/10 rounded-xl text-brand-accent">
+        <div className="lg:col-span-7 bg-white/60 backdrop-blur-3xl rounded-3xl p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] flex flex-col h-full border border-white/60 relative overflow-hidden">
+          {/* subtle interior light glare */}
+          <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-70"></div>
+          
+          <div className="flex items-center gap-3 mb-8 relative z-10">
+            <div className="p-3 bg-white/60 backdrop-blur-md border border-white/50 rounded-xl text-brand-accent shadow-sm">
               <Sun size={28} />
             </div>
             <h3 className="font-heading font-bold text-3xl text-zinc-950">Daily Menu</h3>
           </div>
           
-          <div className="space-y-8 flex-1">
+          <div className="space-y-8 flex-1 relative z-10">
             {/* Breakfast */}
             <div>
-              <div className="flex justify-between items-baseline border-b border-zinc-200 pb-2 mb-3">
+              <div className="flex justify-between items-baseline border-b border-zinc-950/10 pb-2 mb-3">
                 <h4 className="font-bold text-2xl text-zinc-900">Breakfast</h4>
-                <span className="font-serif font-bold text-brand-accent text-3xl">₹100</span>
+                <span className="font-serif font-bold text-brand-accent text-3xl drop-shadow-sm">₹100</span>
               </div>
-              <p className="text-zinc-600 mb-2 font-medium">4 Puri + Chana Masala</p>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-zinc-200 text-zinc-800 px-3 py-1.5 rounded-full">
+              <p className="text-zinc-700 mb-2 font-medium">4 Puri + Chana Masala</p>
+              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-white/50 backdrop-blur-md border border-white/40 text-zinc-800 px-3 py-1.5 rounded-full shadow-sm">
                 <Clock size={16} /> Cooked at 6:00 AM. Never frozen.
               </div>
             </div>
 
             {/* Lunch */}
             <div>
-              <div className="flex justify-between items-baseline border-b border-zinc-200 pb-2 mb-3">
+              <div className="flex justify-between items-baseline border-b border-zinc-950/10 pb-2 mb-3">
                 <h4 className="font-bold text-2xl text-zinc-900">Lunch</h4>
               </div>
               <div className="space-y-3 mb-3">
-                <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-zinc-200 shadow-sm transition-colors hover:border-brand-accent/40">
+                <div className="flex justify-between items-center bg-white/40 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-sm transition-all duration-300 hover:bg-white/70 hover:border-brand-accent/40 hover:shadow-md cursor-default">
                   <span className="font-semibold text-lg text-zinc-900">Veg Thali</span>
-                  <span className="font-serif font-bold text-brand-accent text-2xl">₹125</span>
+                  <span className="font-serif font-bold text-brand-accent text-2xl drop-shadow-sm">₹125</span>
                 </div>
-                <div className="flex justify-between items-center bg-white p-4 rounded-xl border border-zinc-200 shadow-sm transition-colors hover:border-brand-accent/40">
+                <div className="flex justify-between items-center bg-white/40 backdrop-blur-md p-4 rounded-xl border border-white/60 shadow-sm transition-all duration-300 hover:bg-white/70 hover:border-brand-accent/40 hover:shadow-md cursor-default">
                   <span className="font-semibold text-lg text-zinc-900">Fish Thali</span>
-                  <span className="font-serif font-bold text-brand-accent text-2xl">₹150</span>
+                  <span className="font-serif font-bold text-brand-accent text-2xl drop-shadow-sm">₹150</span>
                 </div>
               </div>
-              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-zinc-200 text-zinc-800 px-3 py-1.5 rounded-full">
+              <div className="inline-flex items-center gap-2 text-sm font-semibold bg-white/50 backdrop-blur-md border border-white/40 text-zinc-800 px-3 py-1.5 rounded-full shadow-sm">
                 <Clock size={16} /> At your door before 12:30 PM. Period.
               </div>
             </div>
@@ -249,73 +254,76 @@ const ServicesFold = () => (
         <div className="lg:col-span-5 flex flex-col gap-8 h-full">
           
           {/* Card 2: Monthly Subscriptions */}
-          <div className="bg-zinc-50 rounded-3xl p-8 shadow-2xl flex flex-col border border-brand-accent/20 flex-1">
-            <div className="flex items-center gap-3 mb-6">
-              <div className="p-3 bg-zinc-200 rounded-xl text-zinc-900">
+          <div className="bg-white/60 backdrop-blur-3xl rounded-3xl p-8 shadow-[0_30px_60px_-15px_rgba(0,0,0,0.15)] flex flex-col border border-white/60 flex-1 relative overflow-hidden">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-70"></div>
+            
+            <div className="flex items-center gap-3 mb-6 relative z-10">
+              <div className="p-3 bg-white/60 backdrop-blur-md border border-white/50 rounded-xl text-brand-accent shadow-sm">
                 <Calendar size={28} />
               </div>
               <h3 className="font-heading font-bold text-2xl text-zinc-950">Monthly Plans</h3>
             </div>
 
-            <div className="space-y-3 flex-1">
-              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+            <div className="space-y-3 flex-1 relative z-10">
+              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
                 <div className="flex flex-col">
                   <span className="font-bold text-zinc-900">Veg Thali</span>
-                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
+                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
                 </div>
-                <span className="font-serif font-bold text-brand-accent text-xl">₹5,500</span>
+                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹5,500</span>
               </div>
               
-              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
                 <div className="flex flex-col">
                   <span className="font-bold text-zinc-900">Non-Veg Thali</span>
-                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
+                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Lunch & Dinner</span>
                 </div>
-                <span className="font-serif font-bold text-brand-accent text-xl">₹6,500</span>
+                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹6,500</span>
               </div>
 
-              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
                 <div className="flex flex-col">
                   <span className="font-bold text-zinc-900">Breakfast + Meal</span>
-                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Veg Option</span>
+                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Veg Option</span>
                 </div>
-                <span className="font-serif font-bold text-brand-accent text-xl">₹4,750</span>
+                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹4,750</span>
               </div>
 
-              <div className="bg-white p-3 rounded-xl border border-zinc-200 flex justify-between items-center">
+              <div className="bg-white/40 backdrop-blur-md p-3 rounded-xl border border-white/60 flex justify-between items-center shadow-sm transition-all duration-300 hover:bg-white/70 hover:shadow-md cursor-default">
                 <div className="flex flex-col">
                   <span className="font-bold text-zinc-900">Breakfast + Meal</span>
-                  <span className="text-zinc-500 text-xs font-semibold uppercase tracking-wider">Non-Veg Option</span>
+                  <span className="text-zinc-600 text-xs font-semibold uppercase tracking-wider">Non-Veg Option</span>
                 </div>
-                <span className="font-serif font-bold text-brand-accent text-xl">₹5,750</span>
+                <span className="font-serif font-bold text-brand-accent text-xl drop-shadow-sm">₹5,750</span>
               </div>
             </div>
           </div>
 
           {/* Card 3: Important Rules & Contact */}
-          <div className="bg-brand-accent rounded-3xl p-8 shadow-2xl flex flex-col text-white relative overflow-hidden">
+          <div className="bg-brand-accent/90 backdrop-blur-3xl rounded-3xl p-8 shadow-[0_30px_60px_-15px_rgba(225,29,72,0.4)] flex flex-col text-white relative overflow-hidden border border-white/20">
+            <div className="absolute top-0 left-0 w-full h-px bg-gradient-to-r from-transparent via-white to-transparent opacity-40"></div>
             <div className="absolute -top-12 -right-12 w-40 h-40 bg-white/20 blur-3xl rounded-full"></div>
             
             <div className="relative z-10 flex-1 flex flex-col justify-between space-y-6">
               
-              <div className="bg-black/20 backdrop-blur-sm border border-white/20 p-5 rounded-2xl">
-                <div className="flex items-center gap-2 mb-2 font-bold text-lg">
+              <div className="bg-white/10 backdrop-blur-md border border-white/20 p-5 rounded-2xl shadow-sm">
+                <div className="flex items-center gap-2 mb-2 font-bold text-lg text-white">
                   <Clock size={20} /> Strict Timing
                 </div>
                 <p className="font-medium text-white/90 leading-relaxed">
-                  Order <strong className="text-white font-black">before 9:00 PM today</strong> for tomorrow's meals.
+                  Order <strong className="text-white font-black drop-shadow-sm">before 9:00 PM today</strong> for tomorrow's meals.
                 </p>
               </div>
 
               <div className="space-y-3">
-                <div className="flex items-center gap-3 font-semibold">
+                <div className="flex items-center gap-3 font-semibold text-white/95">
                   <ShieldCheck className="text-white flex-shrink-0" size={20} /> 
                   Zero preservatives. Real ingredients.
                 </div>
               </div>
 
               <div className="pt-4 text-center">
-                <MagneticButton href="tel:9395279215">
+                <MagneticButton href="tel:9395279215" className="inline-flex items-center gap-3 bg-white/90 backdrop-blur-md text-brand-text px-6 py-4 rounded-2xl font-black text-2xl shadow-xl transition-all duration-300 w-full justify-center border border-white hover:bg-white hover:shadow-2xl">
                   <Phone size={24} className="text-brand-accent" />
                   Call 9395279215
                 </MagneticButton>
