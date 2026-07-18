@@ -1,9 +1,16 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
+
+@theme {
+  --color-brand-green: #2ecc71;
+  --color-brand-orange: #f39c12;
+  --color-brand-dark: #2c3e50;
+  --color-brand-light: #ecf0f1;
+}
 
 @layer base {
   body {
-    @apply bg-brand-light text-brand-dark font-sans;
+    background-color: var(--color-brand-light);
+    color: var(--color-brand-dark);
+    font-family: Inter, sans-serif;
   }
 }
