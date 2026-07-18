@@ -187,7 +187,15 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
 );
 
 const ServicesFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto bg-slate-50 text-slate-900 custom-scrollbar">
+  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto text-slate-900 custom-scrollbar">
+    <div className="absolute inset-0 z-0">
+      <img 
+        src="/assets/fold-bg-2.png" 
+        alt="Services Background" 
+        className="w-full h-full object-cover opacity-60"
+      />
+      <div className="absolute inset-0 bg-slate-50/80 backdrop-blur-md"></div>
+    </div>
     <div className="max-w-6xl mx-auto w-full relative z-10 min-h-max py-24">
       <div className="mb-12">
         <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tight mb-3">Select your plan.</h2>
@@ -198,8 +206,7 @@ const ServicesFold = () => (
         
         {/* Cell 1: Monthly (Large, Photographic) */}
         <div className="relative col-span-1 lg:col-span-2 bg-slate-900 rounded-[2rem] p-8 md:p-12 overflow-hidden group flex flex-col justify-end min-h-[450px]">
-          <img src="/assets/fold-bg-2.png" alt="Fresh meals" className="absolute inset-0 w-full h-full object-cover opacity-40 group-hover:opacity-50 transition-opacity duration-700" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950"></div>
           
           <div className="relative z-10 text-white mt-auto pt-32">
             <h3 className="font-heading text-4xl mb-4">Monthly Subscriptions</h3>
