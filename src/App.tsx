@@ -6,24 +6,11 @@ import { Observer } from 'gsap/Observer';
 import { useReducedMotion } from 'motion/react';
 // @ts-ignore
 import SplitText from './content/TextAnimations/SplitText/SplitText.jsx';
-import { Utensils, Clock, Truck, Gift, Phone, CheckCircle, Sunrise, Coffee } from 'lucide-react';
+import { Utensils, Clock, Truck, Gift, Phone, CheckCircle, Sunrise, Coffee, Calendar, ShieldCheck, Sun, Info } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
-const SERVICES = [
-  {
-    id: 1,
-    img: "/assets/img1.jpeg",
-    alt: "Delicious Fresh Breakfast and Veg Thali at Public Canteen",
-    items: ["Fresh Breakfast", "Delicious Veg Thali"]
-  },
-  {
-    id: 2,
-    img: "/assets/img2.jpeg",
-    alt: "Healthy Tasty Fish Thali and Affordable Meals at Public Canteen",
-    items: ["Tasty Fish Thali", "Affordable Prices"]
-  }
-];
+
 
 // Clean Code: Component extraction
 const HeroFold = () => (
@@ -64,58 +51,149 @@ const ServicesFold = () => (
         alt="Services Background" 
         className="w-full h-full object-cover"
       />
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-black/60"></div>
     </div>
-    <div className="max-w-6xl mx-auto w-full relative z-10 min-h-max py-20">
-      <h2 className="text-5xl font-heading font-bold text-center mb-12 text-white">Our Services</h2>
+    <div className="max-w-7xl mx-auto w-full relative z-10 min-h-max py-24">
+      <h2 className="text-5xl md:text-6xl font-heading font-black text-center mb-16 text-white tracking-tight">Our Menu & Packages</h2>
       
-      {/* Bento Diversity */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         
-        {/* Card 1: Full-bleed image with overlay */}
-        <div className="group relative rounded-2xl overflow-hidden shadow-xl aspect-[4/3] lg:aspect-auto lg:h-[400px]">
-          <img src={SERVICES[0].img} alt={SERVICES[0].alt} loading="lazy" className="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent"></div>
-          <div className="absolute inset-0 p-8 flex flex-col justify-end">
-            <ul className="space-y-4">
-              {SERVICES[0].items.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-4">
-                  <CheckCircle className="text-brand-accent flex-shrink-0" size={24} aria-hidden="true" /> 
-                  <span className="font-semibold text-lg text-white">{item}</span>
-                </li>
-              ))}
-            </ul>
+        {/* Card 1: Daily Menu */}
+        <div className="bg-brand-bg/95 backdrop-blur-xl rounded-3xl p-8 shadow-2xl flex flex-col h-full border border-white/10">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-3 bg-brand-accent/10 rounded-xl text-brand-accent">
+              <Sun size={28} />
+            </div>
+            <h3 className="font-heading font-bold text-3xl text-brand-text">Daily Menu</h3>
           </div>
-        </div>
-
-        {/* Card 2: Tinted Background */}
-        <div className="group rounded-2xl overflow-hidden shadow-xl bg-brand-bg flex flex-col h-auto lg:h-[400px]">
-          <div className="p-6 pb-0">
-             <img src={SERVICES[1].img} alt={SERVICES[1].alt} loading="lazy" className="w-full h-48 object-cover rounded-2xl shadow-sm" />
-          </div>
-          <div className="p-8 flex-1 flex flex-col justify-center">
-            <ul className="space-y-4">
-              {SERVICES[1].items.map((item, idx) => (
-                <li key={idx} className="flex items-center gap-4">
-                  <CheckCircle className="text-brand-accent flex-shrink-0" size={24} aria-hidden="true" /> 
-                  <span className="font-semibold text-lg text-brand-text">{item}</span>
-                </li>
-              ))}
-            </ul>
-          </div>
-        </div>
-
-        {/* Card 3: Clean White Card */}
-        <div className="group rounded-2xl overflow-hidden shadow-xl bg-white flex flex-col h-auto lg:h-[400px]">
-          <img src="/assets/img3.jpeg" alt="Delivery person ensuring timely delivery" loading="lazy" className="w-full h-56 object-cover" />
-          <div className="p-8 flex-1 flex flex-col justify-center">
-            <div className="flex items-start gap-4">
-              <Truck className="text-brand-accent flex-shrink-0 mt-1" size={32} aria-hidden="true" />
-              <div>
-                <h3 className="font-heading font-bold text-2xl mb-1 text-brand-text">Timely Delivery</h3>
-                <p className="text-zinc-500 font-medium leading-relaxed">Fresh food straight to your doorstep.</p>
+          
+          <div className="space-y-8 flex-1">
+            {/* Breakfast */}
+            <div>
+              <div className="flex justify-between items-baseline border-b border-zinc-200 pb-2 mb-3">
+                <h4 className="font-bold text-xl text-brand-text">Breakfast</h4>
+                <span className="font-bold text-brand-accent text-xl">₹100</span>
+              </div>
+              <p className="text-zinc-600 mb-2">4 Puri + Chana Masala</p>
+              <div className="inline-flex items-center gap-2 text-xs font-semibold bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-full">
+                <Clock size={14} /> Delivery: 7:00 AM - 7:30 AM
               </div>
             </div>
+
+            {/* Lunch */}
+            <div>
+              <div className="flex justify-between items-baseline border-b border-zinc-200 pb-2 mb-3">
+                <h4 className="font-bold text-xl text-brand-text">Lunch</h4>
+              </div>
+              <div className="space-y-3 mb-3">
+                <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-zinc-100 shadow-sm">
+                  <span className="font-semibold text-zinc-800">Veg Thali</span>
+                  <span className="font-bold text-brand-accent">₹125</span>
+                </div>
+                <div className="flex justify-between items-center bg-white p-3 rounded-xl border border-zinc-100 shadow-sm">
+                  <span className="font-semibold text-zinc-800">Fish Thali</span>
+                  <span className="font-bold text-brand-accent">₹150</span>
+                </div>
+              </div>
+              <div className="inline-flex items-center gap-2 text-xs font-semibold bg-zinc-100 text-zinc-600 px-3 py-1.5 rounded-full">
+                <Clock size={14} /> Delivery: 12:00 PM - 12:30 PM
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 2: Monthly Subscriptions */}
+        <div className="bg-brand-accent rounded-3xl p-8 shadow-2xl flex flex-col h-full text-white relative overflow-hidden">
+          {/* subtle decorative blur */}
+          <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/20 blur-3xl rounded-full"></div>
+          
+          <div className="relative z-10 flex flex-col h-full">
+            <div className="flex items-center gap-3 mb-8">
+              <div className="p-3 bg-white/20 rounded-xl text-white backdrop-blur-sm">
+                <Calendar size={28} />
+              </div>
+              <h3 className="font-heading font-bold text-3xl">Monthly Plans</h3>
+            </div>
+
+            <div className="space-y-4 flex-1">
+              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-bold text-lg">Veg Thali</span>
+                  <span className="font-bold text-xl">₹5,500</span>
+                </div>
+                <span className="text-white/80 text-sm font-medium">Lunch & Dinner (2x Daily)</span>
+              </div>
+              
+              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-bold text-lg">Non-Veg Thali</span>
+                  <span className="font-bold text-xl">₹6,500</span>
+                </div>
+                <span className="text-white/80 text-sm font-medium">Lunch & Dinner (2x Daily)</span>
+              </div>
+
+              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-bold text-lg">Breakfast + 1 Meal</span>
+                  <span className="font-bold text-xl">₹4,750</span>
+                </div>
+                <span className="text-white/80 text-sm font-medium">Veg Option</span>
+              </div>
+
+              <div className="bg-black/20 p-4 rounded-2xl backdrop-blur-sm border border-white/10">
+                <div className="flex justify-between items-start mb-1">
+                  <span className="font-bold text-lg">Breakfast + 1 Meal</span>
+                  <span className="font-bold text-xl">₹5,750</span>
+                </div>
+                <span className="text-white/80 text-sm font-medium">Non-Veg Option</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        {/* Card 3: Important Rules & Contact */}
+        <div className="bg-brand-bg/95 backdrop-blur-xl rounded-3xl p-8 shadow-2xl flex flex-col h-full border border-white/10">
+          <div className="flex items-center gap-3 mb-8">
+            <div className="p-3 bg-zinc-900 rounded-xl text-white">
+              <Info size={28} />
+            </div>
+            <h3 className="font-heading font-bold text-3xl text-brand-text">How to Order</h3>
+          </div>
+
+          <div className="flex-1 flex flex-col justify-between space-y-6">
+            
+            <div className="bg-brand-accent/10 border border-brand-accent/20 p-5 rounded-2xl text-brand-accent">
+              <div className="flex items-center gap-2 mb-2 font-bold text-lg">
+                <Clock size={20} /> Strict Order Timing
+              </div>
+              <p className="font-medium text-brand-text leading-relaxed">
+                You must place your order <strong className="text-brand-accent font-black">before 9:00 PM today</strong> for tomorrow's breakfast and lunch.
+              </p>
+            </div>
+
+            <ul className="space-y-4">
+              <li className="flex items-center gap-3 text-zinc-700 font-medium">
+                <ShieldCheck className="text-brand-accent flex-shrink-0" size={20} /> 
+                Fresh & Hygienic Home-Style Food
+              </li>
+              <li className="flex items-center gap-3 text-zinc-700 font-medium">
+                <CheckCircle className="text-brand-accent flex-shrink-0" size={20} /> 
+                High Nutritional Value
+              </li>
+              <li className="flex items-center gap-3 text-zinc-700 font-medium">
+                <Truck className="text-brand-accent flex-shrink-0" size={20} /> 
+                Always On-Time Delivery
+              </li>
+            </ul>
+
+            <div className="pt-6 border-t border-zinc-200 text-center">
+              <p className="text-zinc-500 font-medium mb-3 text-sm uppercase tracking-widest">Call for orders & enquiries</p>
+              <a href="tel:9395279215" className="inline-flex items-center gap-3 bg-zinc-900 text-white px-6 py-4 rounded-2xl font-black text-2xl shadow-xl hover:bg-zinc-800 active:scale-[0.98] transition-all w-full justify-center">
+                <Phone size={24} className="text-brand-accent" />
+                9395279215
+              </a>
+            </div>
+
           </div>
         </div>
 
