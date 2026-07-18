@@ -6,7 +6,7 @@ import { Observer } from 'gsap/Observer';
 import { useReducedMotion } from 'motion/react';
 // @ts-ignore
 import SplitText from './content/TextAnimations/SplitText/SplitText.jsx';
-import { Utensils, Clock, Gift, Phone, ShieldCheck, Sun, Calendar, Sunrise, Coffee } from 'lucide-react';
+import { Utensils, Clock, Gift, Phone, ShieldCheck, Sun, Calendar } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger, Observer);
 
@@ -237,78 +237,39 @@ const ServicesFold = () => (
 
 
 const OfferFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center p-4 overflow-y-auto custom-scrollbar">
+  <section className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden bg-zinc-950">
     <div className="absolute inset-0 z-0">
       <img 
         src="/assets/fold-bg-3.png" 
         alt="Grand Launch Offer Background" 
-        className="w-full h-full object-cover"
+        className="w-full h-full object-cover opacity-60 mix-blend-overlay grayscale-[30%]"
         loading="lazy"
       />
-      <div className="absolute inset-0 bg-black/40"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-950/80 to-transparent"></div>
     </div>
 
-    
-    <div className="relative z-10 max-w-4xl mx-auto w-full flex flex-col gap-8 min-h-max py-20 justify-center">
+    <div className="relative z-10 max-w-5xl mx-auto w-full px-6 flex flex-col items-center justify-center text-center">
       
-      {/* Grand Launch Offer */}
-      <div className="bg-brand-accent rounded-2xl p-10 text-brand-bg shadow-2xl flex flex-col items-center justify-center relative overflow-hidden">
-        {/* subtle decorative blur */}
-        <div className="absolute -top-24 -right-24 w-64 h-64 bg-white/20 blur-3xl rounded-full"></div>
-        
-        <div className="relative z-10 flex flex-col items-center">
-          <Gift size={48} className="text-white mb-6 animate-pulse" aria-hidden="true" />
-          <h2 className="text-4xl md:text-5xl font-heading font-black text-white mb-4 text-center">Grand Launch Offer!</h2>
-          <p className="font-mono text-sm md:text-base font-bold bg-black/20 text-white px-4 py-2 rounded-lg mb-8">
-            16th July – 31st July 2026
-          </p>
-          
-          <div className="text-center mb-10 max-w-lg">
-            <p className="text-lg text-white/90 mb-4">Join our WhatsApp group during this period and receive a <strong className="text-white font-bold underline decoration-2 underline-offset-4">FREE Breakfast</strong> the following day!</p>
-            <div className="inline-flex items-center gap-2 bg-white text-brand-accent px-4 py-2 rounded-xl font-bold text-sm shadow-md">
-              <Utensils size={16} aria-hidden="true" />
-              Includes: 4 Puri + Chana Masala
-            </div>
-          </div>
-          
-          {/* Tactile CTA */}
-          <a 
-            href="https://wa.me/919395279215" 
-            aria-label="Order on WhatsApp"
-            className="inline-flex items-center justify-center min-h-[56px] px-8 gap-3 bg-white text-brand-text rounded-2xl font-bold text-lg shadow-xl hover:bg-zinc-100 active:scale-[0.98] active:-translate-y-[1px] transition-all duration-200 focus:outline-none focus-visible:ring-4 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-brand-accent"
-          >
-            <Phone size={24} aria-hidden="true" />
-            Order on WhatsApp
-          </a>
-        </div>
+      <div className="inline-flex items-center gap-2 font-mono text-sm font-bold bg-brand-accent text-white px-4 py-2 rounded-full mb-8">
+        <Gift size={16} /> 16th July – 31st July 2026
       </div>
 
-      {/* Schedule */}
-      <div className="bg-brand-bg rounded-2xl p-8 shadow-xl border border-zinc-200 flex flex-col md:flex-row items-center justify-between gap-8 w-full">
-        <div className="flex-1 text-center md:text-left">
-          <div className="flex items-center justify-center md:justify-start gap-3 mb-3">
-            <Clock className="text-brand-accent" size={28} aria-hidden="true" />
-            <h2 className="text-3xl font-heading font-bold text-brand-text">Order Timings</h2>
-          </div>
-          <p className="text-lg text-zinc-600">
-            Please place your order before <strong className="text-brand-text font-bold">9:00 PM</strong> for the next day's meals.
-          </p>
-        </div>
-        <div className="w-full md:w-72 bg-white rounded-2xl p-6 shadow-sm border border-zinc-100 space-y-4">
-          <div className="flex justify-between items-center pb-4 border-b border-zinc-100">
-            <span className="flex items-center gap-2 text-zinc-500 font-medium">
-              <Sunrise size={20} aria-hidden="true" /> Breakfast
-            </span>
-            <span className="font-bold text-brand-text">7:00 AM</span>
-          </div>
-          <div className="flex justify-between items-center pt-2">
-            <span className="flex items-center gap-2 text-zinc-500 font-medium">
-              <Coffee size={20} aria-hidden="true" /> Lunch
-            </span>
-            <span className="font-bold text-brand-text">12:00 PM</span>
-          </div>
-        </div>
+      <h2 className="text-5xl md:text-8xl font-heading font-black text-white mb-6 leading-tight tracking-tighter">
+        Get A <span className="text-brand-accent">FREE</span><br />
+        <span className="font-serif italic font-normal text-6xl md:text-9xl">Breakfast</span>
+      </h2>
+
+      <p className="text-xl md:text-2xl text-zinc-300 mb-12 max-w-2xl mx-auto font-medium leading-relaxed">
+        Join our WhatsApp group today and receive a complimentary morning meal (4 Puri + Chana Masala) on us.
+      </p>
+
+      <div className="w-full max-w-sm mx-auto">
+        <MagneticButton href="https://wa.me/919395279215">
+          <Phone size={24} className="text-brand-accent" />
+          Join via WhatsApp
+        </MagneticButton>
       </div>
+
     </div>
   </section>
 );
