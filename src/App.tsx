@@ -188,7 +188,15 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
 
 const ServicesFold = () => (
   <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto bg-brand-bg text-brand-text custom-scrollbar">
-    <div className="max-w-7xl mx-auto w-full relative z-10 min-h-max py-24">
+    <div className="absolute inset-0 z-0">
+      <img 
+        src="/assets/fold-bg-2.png" 
+        alt="Services Background" 
+        className="w-full h-full object-cover opacity-60"
+      />
+      <div className="absolute inset-0 bg-slate-50/80 backdrop-blur-md"></div>
+    </div>
+    <div className="max-w-6xl mx-auto w-full relative z-10 min-h-max py-24">
       <div className="text-center mb-16">
         <h2 className="text-5xl md:text-6xl font-heading font-black text-brand-text tracking-tight mb-4">Our Menu & Packages</h2>
         <p className="text-xl text-slate-500 font-sans max-w-2xl mx-auto">Flexible plans to suit your lifestyle. Cancel anytime. Zero hidden fees.</p>
@@ -524,26 +532,26 @@ function App() {
         <LiquidModal.Header>Subscription Plan</LiquidModal.Header>
         <LiquidModal.Body>
           <div className="space-y-6">
-            <p>
+            <p className="text-slate-600">
               Experience the pinnacle of everyday dining. Our Monthly Plan guarantees 60 fresh meals delivered directly to your door, exactly when you need them.
             </p>
             
-            <div className="bg-white/5 rounded-2xl p-4 border border-white/10 flex items-center justify-between">
+            <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 flex items-center justify-between">
               <div>
-                <div className="text-zinc-50 font-bold mb-1">Standard Tier</div>
-                <div className="text-sm text-zinc-400">Breakfast & Lunch</div>
+                <div className="text-brand-text font-bold mb-1">Standard Tier</div>
+                <div className="text-sm text-slate-500">Breakfast & Lunch</div>
               </div>
               <div className="text-right">
-                <div className="text-brand-accent font-serif font-bold text-xl italic">₹3600<span className="text-sm not-italic text-zinc-500">/mo</span></div>
+                <div className="text-brand-cta font-heading font-bold text-2xl italic">₹3600<span className="text-sm not-italic text-slate-400">/mo</span></div>
               </div>
             </div>
           </div>
         </LiquidModal.Body>
         <LiquidModal.Footer>
-          <button onClick={() => setIsModalOpen(false)} className="px-6 py-2 rounded-xl text-zinc-400 font-bold hover:text-white transition-colors">
+          <button onClick={() => setIsModalOpen(false)} className="px-6 py-2 rounded-xl text-slate-500 font-bold hover:text-brand-text transition-colors">
             Cancel
           </button>
-          <MagneticButton href="https://wa.me/919395279215" className="px-6 py-3 bg-brand-accent text-white rounded-xl font-bold shadow-lg hover:bg-brand-accent/90 transition-colors">
+          <MagneticButton href="https://wa.me/919395279215" className="px-6 py-3 bg-brand-primary text-white rounded-xl font-bold shadow-lg hover:bg-blue-600 transition-colors inline-block text-center">
             Proceed via WhatsApp
           </MagneticButton>
         </LiquidModal.Footer>
