@@ -6,6 +6,10 @@
   --color-brand-gold: #CA8A04;
   --color-brand-brown: #450A0A;
   
+  /* Semantic Mappings */
+  --color-brand-cta: var(--color-brand-red);
+  --color-brand-primary: var(--color-brand-brown);
+  
   --font-heading: 'Playfair Display SC', serif;
   --font-sans: 'Karla', sans-serif;
 }

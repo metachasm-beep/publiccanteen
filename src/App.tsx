@@ -187,77 +187,81 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
 );
 
 const ServicesFold = () => (
-  <section className="relative w-full h-full flex flex-col lg:flex-row items-stretch justify-center overflow-y-auto lg:overflow-hidden bg-slate-50 text-slate-900 custom-scrollbar">
+  <section className="relative w-full h-full flex flex-col lg:flex-row items-stretch justify-center overflow-y-auto lg:overflow-hidden bg-brand-primary text-brand-light custom-scrollbar">
     
-    {/* Left Side: Photographic Editorial Split */}
-    <div className="relative w-full lg:w-1/2 flex flex-col min-h-[500px] lg:min-h-full justify-end p-8 md:p-12 lg:p-24 bg-slate-900 group">
+    <div className="absolute inset-0 z-0">
       <img 
         src="/assets/fold-bg-2.png" 
         alt="Services Background" 
-        className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-overlay grayscale-[20%] group-hover:opacity-60 transition-opacity duration-700"
+        className="w-full h-full object-cover opacity-40 mix-blend-overlay grayscale-[10%]"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/60 to-transparent"></div>
-      
-      <div className="relative z-10 text-white mt-auto w-full max-w-xl mx-auto">
-        <h2 className="text-5xl md:text-7xl font-heading font-black tracking-tighter mb-6 text-balance">Monthly Subscription</h2>
-        <p className="text-xl md:text-2xl text-slate-300 max-w-[45ch] mb-12 font-medium leading-relaxed text-pretty">
-          Save up to 20% with our automated monthly delivery. 60 meals delivered fresh. Skip any day. Zero hidden fees.
-        </p>
-        
-        <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 mb-12">
-          <div>
-            <div className="font-heading text-4xl text-brand-cta">₹5,500</div>
-            <div className="text-white/60 text-sm font-bold mt-1">Veg Thali</div>
-          </div>
-          <div>
-            <div className="font-heading text-4xl text-brand-cta">₹6,500</div>
-            <div className="text-white/60 text-sm font-bold mt-1">Non-Veg Thali</div>
-          </div>
-        </div>
-        
-        <MagneticButton className="inline-flex items-center gap-3 bg-white text-zinc-950 px-8 py-4 rounded-full font-bold font-sans text-xl transition-transform duration-200 active:scale-95 hover:bg-slate-100">
-          Choose Monthly Plan
-        </MagneticButton>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/95 to-brand-primary/80"></div>
     </div>
 
-    {/* Right Side: Clean Typography Panel */}
-    <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-12 lg:p-24 bg-white overflow-y-auto">
-      <div className="w-full max-w-lg mx-auto flex flex-col justify-center h-full">
-        
-        <div className="mb-16">
-          <h3 className="text-4xl md:text-5xl font-heading font-black tracking-tighter mb-6">Daily Menu</h3>
-          <p className="text-lg text-slate-500 max-w-[45ch] leading-relaxed text-pretty">
-            Order before 9:00 PM today for tomorrow's meals. Delivered hot and fresh.
+    <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row h-full">
+      {/* Left Side: Monthly Plan */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-12 lg:p-24 border-b lg:border-b-0 lg:border-r border-white/10">
+        <div className="w-full max-w-xl mx-auto">
+          <h2 className="text-5xl md:text-7xl font-heading font-black tracking-tighter mb-6 text-balance">Monthly Subscription</h2>
+          <p className="text-xl md:text-2xl text-brand-light/80 max-w-[45ch] mb-12 font-medium leading-relaxed text-pretty">
+            Save up to 20% with our automated monthly delivery. 60 meals delivered fresh. Skip any day. Zero hidden fees.
           </p>
           
-          <div className="mt-10 space-y-6">
-            <div className="flex justify-between items-baseline border-b border-slate-100 pb-3 group cursor-default">
-              <span className="font-bold text-xl text-slate-900 group-hover:text-brand-primary transition-colors">Breakfast</span>
-              <span className="font-heading text-2xl font-bold text-slate-900">₹100</span>
+          <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 mb-12">
+            <div>
+              <div className="font-heading text-4xl text-brand-cta">₹5,500</div>
+              <div className="text-brand-light/60 text-sm font-bold mt-1 uppercase tracking-wider">Veg Thali</div>
             </div>
-            <div className="flex justify-between items-baseline border-b border-slate-100 pb-3 group cursor-default">
-              <span className="font-bold text-xl text-slate-900 group-hover:text-brand-primary transition-colors">Veg Lunch</span>
-              <span className="font-heading text-2xl font-bold text-slate-900">₹125</span>
-            </div>
-            <div className="flex justify-between items-baseline border-b border-slate-100 pb-3 group cursor-default">
-              <span className="font-bold text-xl text-slate-900 group-hover:text-brand-primary transition-colors">Fish Lunch</span>
-              <span className="font-heading text-2xl font-bold text-slate-900">₹150</span>
+            <div>
+              <div className="font-heading text-4xl text-brand-cta">₹6,500</div>
+              <div className="text-brand-light/60 text-sm font-bold mt-1 uppercase tracking-wider">Non-Veg Thali</div>
             </div>
           </div>
-        </div>
-
-        <div>
-          <h3 className="text-2xl font-heading font-bold mb-4">How it Works</h3>
-          <p className="text-slate-500 font-sans leading-relaxed max-w-[45ch] mb-8 text-pretty">
-            Zero preservatives. Real, fresh ingredients only. Our kitchen operates with strict hygiene standards to bring you home-style meals daily.
-          </p>
           
-          <div className="inline-block">
-            <MagneticButton href="tel:9395279215" className="inline-flex items-center gap-3 bg-brand-cta text-white px-8 py-4 rounded-full font-bold font-sans text-lg shadow-lg transition-transform duration-200 active:scale-95 hover:bg-orange-600">
-              <Phone size={20} />
-              Call 9395279215
-            </MagneticButton>
+          <MagneticButton className="inline-flex items-center gap-3 bg-brand-light text-brand-primary px-8 py-4 rounded-full font-bold font-sans text-xl transition-transform duration-200 active:scale-95 hover:bg-white border border-transparent hover:border-brand-cta/30">
+            Choose Monthly Plan
+          </MagneticButton>
+        </div>
+      </div>
+
+      {/* Right Side: Daily Menu & Rules */}
+      <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-12 lg:p-24 overflow-y-auto">
+        <div className="w-full max-w-lg mx-auto flex flex-col justify-center h-full">
+          
+          <div className="mb-16">
+            <h3 className="text-4xl md:text-5xl font-heading font-black tracking-tighter mb-6">Daily Menu</h3>
+            <p className="text-lg text-brand-light/70 max-w-[45ch] leading-relaxed text-pretty">
+              Order before 9:00 PM today for tomorrow's meals. Delivered hot and fresh.
+            </p>
+            
+            <div className="mt-10 space-y-6">
+              <div className="flex justify-between items-baseline border-b border-white/10 pb-3 group cursor-default">
+                <span className="font-bold text-xl group-hover:text-brand-gold transition-colors">Breakfast</span>
+                <span className="font-heading text-2xl font-bold text-brand-cta">₹100</span>
+              </div>
+              <div className="flex justify-between items-baseline border-b border-white/10 pb-3 group cursor-default">
+                <span className="font-bold text-xl group-hover:text-brand-gold transition-colors">Veg Lunch</span>
+                <span className="font-heading text-2xl font-bold text-brand-cta">₹125</span>
+              </div>
+              <div className="flex justify-between items-baseline border-b border-white/10 pb-3 group cursor-default">
+                <span className="font-bold text-xl group-hover:text-brand-gold transition-colors">Fish Lunch</span>
+                <span className="font-heading text-2xl font-bold text-brand-cta">₹150</span>
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <h3 className="text-2xl font-heading font-bold mb-4">How it Works</h3>
+            <p className="text-brand-light/70 font-sans leading-relaxed max-w-[45ch] mb-8 text-pretty">
+              Zero preservatives. Real, fresh ingredients only. Our kitchen operates with strict hygiene standards to bring you home-style meals daily.
+            </p>
+            
+            <div className="inline-block">
+              <MagneticButton href="tel:9395279215" className="inline-flex items-center gap-3 bg-brand-cta text-white px-8 py-4 rounded-full font-bold font-sans text-lg shadow-lg shadow-brand-cta/20 transition-transform duration-200 active:scale-95 hover:bg-brand-red">
+                <Phone size={20} />
+                Call 9395279215
+              </MagneticButton>
+            </div>
           </div>
         </div>
       </div>
