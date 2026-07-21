@@ -189,13 +189,15 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
 const ServicesFold = () => (
   <section className="relative w-full h-full flex flex-col lg:flex-row items-stretch justify-center overflow-y-auto lg:overflow-hidden bg-brand-primary text-brand-light custom-scrollbar">
     
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 bg-brand-primary">
       <img 
-        src="/assets/fold-bg-2.png" 
-        alt="Services Background" 
-        className="w-full h-full object-cover opacity-40 mix-blend-overlay grayscale-[10%]"
+        src="/assets/macro-spices.png" 
+        alt="Raw Spices Background" 
+        className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-luminosity"
       />
-      <div className="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/95 to-brand-primary/80"></div>
+      {/* Duotone effect layers */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary via-brand-primary/95 to-brand-cta/50 mix-blend-multiply"></div>
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-primary via-brand-primary/80 to-transparent"></div>
     </div>
 
     <div className="relative z-10 w-full max-w-7xl mx-auto flex flex-col lg:flex-row h-full">
