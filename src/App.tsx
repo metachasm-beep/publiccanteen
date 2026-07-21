@@ -153,7 +153,7 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
   <section className="relative w-full h-full flex flex-col items-center justify-center p-4 custom-scrollbar overflow-y-auto">
     <div className="absolute inset-0 z-0">
       <img 
-        src="/assets/fold-bg-1.png" 
+        src="/assets/fold-bg-1.webp" 
         alt="Hero Background showing fresh restaurant food" 
         className="w-full h-full object-cover"
       />
@@ -191,9 +191,10 @@ const ServicesFold = () => (
     
     <div className="absolute inset-0 z-0 bg-brand-primary">
       <img 
-        src="/assets/macro-spices.png" 
+        src="/assets/macro-spices.webp" 
         alt="Raw Spices Background" 
         className="absolute inset-0 w-full h-full object-cover opacity-70 mix-blend-luminosity"
+        loading="lazy"
       />
       {/* Duotone effect layers */}
       <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary via-brand-primary/95 to-brand-cta/50 mix-blend-multiply"></div>
@@ -277,7 +278,7 @@ const OfferFold = () => (
   <section className="relative w-full h-full flex flex-col items-center justify-center overflow-hidden bg-zinc-950">
     <div className="absolute inset-0 z-0">
       <img 
-        src="/assets/fold-bg-3.png" 
+        src="/assets/fold-bg-3.webp" 
         alt="Grand Launch Offer Background" 
         className="w-full h-full object-cover opacity-60 mix-blend-overlay grayscale-[30%]"
         loading="lazy"
