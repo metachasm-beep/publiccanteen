@@ -39,12 +39,12 @@ export const LiquidModal = ({ isOpen, onClose, children }: { isOpen: boolean, on
       <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
         <div 
           ref={backdropRef} 
-          className="absolute inset-0 bg-slate-900/60 backdrop-blur-sm cursor-pointer" 
+          className="absolute inset-0 bg-zinc-950/90 cursor-pointer" 
           onClick={onClose}
         />
         <div 
           ref={modalRef} 
-          className="relative w-full max-w-lg bg-white border-2 border-brand-primary rounded-3xl overflow-hidden shadow-2xl flex flex-col"
+          className="relative w-full max-w-lg bg-white rounded-2xl overflow-hidden shadow-2xl flex flex-col"
         >
           <button 
             onClick={onClose}
@@ -187,84 +187,79 @@ const HeroFold = ({ onOpenModal }: { onOpenModal: () => void }) => (
 );
 
 const ServicesFold = () => (
-  <section className="relative w-full h-full flex flex-col items-center justify-center px-4 overflow-y-auto text-slate-900 custom-scrollbar">
-    <div className="absolute inset-0 z-0">
+  <section className="relative w-full h-full flex flex-col lg:flex-row items-stretch justify-center overflow-y-auto lg:overflow-hidden bg-slate-50 text-slate-900 custom-scrollbar">
+    
+    {/* Left Side: Photographic Editorial Split */}
+    <div className="relative w-full lg:w-1/2 flex flex-col min-h-[500px] lg:min-h-full justify-end p-8 md:p-12 lg:p-24 bg-slate-900 group">
       <img 
         src="/assets/fold-bg-2.png" 
         alt="Services Background" 
-        className="w-full h-full object-cover opacity-60"
+        className="absolute inset-0 w-full h-full object-cover opacity-50 mix-blend-overlay grayscale-[20%] group-hover:opacity-60 transition-opacity duration-700"
       />
-      <div className="absolute inset-0 bg-slate-50/80 backdrop-blur-md"></div>
-    </div>
-    <div className="max-w-6xl mx-auto w-full relative z-10 min-h-max py-24">
-      <div className="mb-12">
-        <h2 className="text-4xl md:text-5xl font-heading font-black tracking-tight mb-3">Select your plan.</h2>
-        <p className="text-lg text-slate-600 font-sans max-w-[65ch]">Flexible options to suit your lifestyle. Cancel anytime. Zero hidden fees.</p>
-      </div>
+      <div className="absolute inset-0 bg-gradient-to-t from-zinc-950 via-zinc-900/60 to-transparent"></div>
       
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 items-stretch">
+      <div className="relative z-10 text-white mt-auto w-full max-w-xl mx-auto">
+        <h2 className="text-5xl md:text-7xl font-heading font-black tracking-tighter mb-6 text-balance">Monthly Subscription</h2>
+        <p className="text-xl md:text-2xl text-slate-300 max-w-[45ch] mb-12 font-medium leading-relaxed text-pretty">
+          Save up to 20% with our automated monthly delivery. 60 meals delivered fresh. Skip any day. Zero hidden fees.
+        </p>
         
-        {/* Cell 1: Monthly (Large, Photographic) */}
-        <div className="relative col-span-1 lg:col-span-2 bg-slate-900 rounded-[2rem] p-8 md:p-12 overflow-hidden group flex flex-col justify-end min-h-[450px]">
-          <div className="absolute inset-0 bg-gradient-to-br from-slate-800 to-slate-950"></div>
-          
-          <div className="relative z-10 text-white mt-auto pt-32">
-            <h3 className="font-heading text-4xl mb-4">Monthly Subscriptions</h3>
-            <p className="text-slate-300 max-w-[45ch] mb-8 leading-relaxed font-sans text-lg">
-              Save up to 20% with our automated monthly delivery. 60 meals delivered fresh. Skip any day.
-            </p>
-            <div className="grid grid-cols-2 gap-4 max-w-sm mb-8">
-              <div>
-                <div className="text-white/50 text-xs uppercase tracking-wider mb-1 font-bold">Veg Thali</div>
-                <div className="font-heading text-2xl text-brand-cta">₹5,500</div>
-              </div>
-              <div>
-                <div className="text-white/50 text-xs uppercase tracking-wider mb-1 font-bold">Non-Veg Thali</div>
-                <div className="font-heading text-2xl text-brand-cta">₹6,500</div>
-              </div>
-            </div>
-            <button className="bg-white text-slate-900 px-8 py-3.5 rounded-full font-bold font-sans transition-transform duration-200 active:scale-95 hover:bg-slate-100 inline-block">
-              Choose Monthly Plan
-            </button>
+        <div className="flex flex-col sm:flex-row gap-6 sm:gap-12 mb-12">
+          <div>
+            <div className="font-heading text-4xl text-brand-cta">₹5,500</div>
+            <div className="text-white/60 text-sm font-bold mt-1">Veg Thali</div>
+          </div>
+          <div>
+            <div className="font-heading text-4xl text-brand-cta">₹6,500</div>
+            <div className="text-white/60 text-sm font-bold mt-1">Non-Veg Thali</div>
           </div>
         </div>
+        
+        <MagneticButton className="inline-flex items-center gap-3 bg-white text-zinc-950 px-8 py-4 rounded-full font-bold font-sans text-xl transition-transform duration-200 active:scale-95 hover:bg-slate-100">
+          Choose Monthly Plan
+        </MagneticButton>
+      </div>
+    </div>
 
-        {/* Cell 2: Daily (Small, Solid Brand) */}
-        <div className="col-span-1 lg:col-span-1 bg-brand-primary rounded-[2rem] p-8 md:p-10 flex flex-col text-white">
-          <h3 className="font-heading text-3xl mb-4">Daily Menu</h3>
-          <p className="text-blue-100 mb-10 font-sans leading-relaxed">
+    {/* Right Side: Clean Typography Panel */}
+    <div className="w-full lg:w-1/2 flex flex-col justify-center p-8 md:p-12 lg:p-24 bg-white overflow-y-auto">
+      <div className="w-full max-w-lg mx-auto flex flex-col justify-center h-full">
+        
+        <div className="mb-16">
+          <h3 className="text-4xl md:text-5xl font-heading font-black tracking-tighter mb-6">Daily Menu</h3>
+          <p className="text-lg text-slate-500 max-w-[45ch] leading-relaxed text-pretty">
             Order before 9:00 PM today for tomorrow's meals. Delivered hot and fresh.
           </p>
-          <div className="space-y-6 flex-1 font-sans">
-            <div className="border-l-2 border-blue-400/50 pl-5">
-              <div className="font-bold text-xl mb-1">Breakfast</div>
-              <div className="text-blue-200 text-sm">₹100 · 4 Puri + Chana</div>
+          
+          <div className="mt-10 space-y-6">
+            <div className="flex justify-between items-baseline border-b border-slate-100 pb-3 group cursor-default">
+              <span className="font-bold text-xl text-slate-900 group-hover:text-brand-primary transition-colors">Breakfast</span>
+              <span className="font-heading text-2xl font-bold text-slate-900">₹100</span>
             </div>
-            <div className="border-l-2 border-blue-400/50 pl-5">
-              <div className="font-bold text-xl mb-1">Veg Lunch</div>
-              <div className="text-blue-200 text-sm">₹125 · Full Thali</div>
+            <div className="flex justify-between items-baseline border-b border-slate-100 pb-3 group cursor-default">
+              <span className="font-bold text-xl text-slate-900 group-hover:text-brand-primary transition-colors">Veg Lunch</span>
+              <span className="font-heading text-2xl font-bold text-slate-900">₹125</span>
             </div>
-            <div className="border-l-2 border-blue-400/50 pl-5">
-              <div className="font-bold text-xl mb-1">Fish Lunch</div>
-              <div className="text-blue-200 text-sm">₹150 · Full Thali</div>
+            <div className="flex justify-between items-baseline border-b border-slate-100 pb-3 group cursor-default">
+              <span className="font-bold text-xl text-slate-900 group-hover:text-brand-primary transition-colors">Fish Lunch</span>
+              <span className="font-heading text-2xl font-bold text-slate-900">₹150</span>
             </div>
           </div>
         </div>
 
-        {/* Cell 3: Contact/Rules (Full width pill-like) */}
-        <div className="col-span-1 lg:col-span-3 bg-white border border-slate-200 rounded-[2rem] p-8 md:p-10 flex flex-col md:flex-row items-center justify-between gap-8">
-          <div>
-            <h3 className="font-heading text-2xl mb-3 text-slate-900">How it Works</h3>
-            <p className="text-slate-500 font-sans max-w-[55ch] leading-relaxed">
-              Zero preservatives. Real, fresh ingredients only. Our kitchen operates with strict hygiene standards to bring you home-style meals daily.
-            </p>
+        <div>
+          <h3 className="text-2xl font-heading font-bold mb-4">How it Works</h3>
+          <p className="text-slate-500 font-sans leading-relaxed max-w-[45ch] mb-8 text-pretty">
+            Zero preservatives. Real, fresh ingredients only. Our kitchen operates with strict hygiene standards to bring you home-style meals daily.
+          </p>
+          
+          <div className="inline-block">
+            <MagneticButton href="tel:9395279215" className="inline-flex items-center gap-3 bg-brand-cta text-white px-8 py-4 rounded-full font-bold font-sans text-lg shadow-lg transition-transform duration-200 active:scale-95 hover:bg-orange-600">
+              <Phone size={20} />
+              Call 9395279215
+            </MagneticButton>
           </div>
-          <MagneticButton href="tel:9395279215" className="shrink-0 inline-flex items-center gap-3 bg-brand-cta text-white px-8 py-4 rounded-full font-bold font-sans text-lg shadow-lg transition-transform duration-200 active:scale-95 hover:bg-orange-600">
-            <Phone size={20} />
-            Call 9395279215
-          </MagneticButton>
         </div>
-
       </div>
     </div>
   </section>
@@ -459,13 +454,13 @@ function App() {
               Experience the pinnacle of everyday dining. Our Monthly Plan guarantees 60 fresh meals delivered directly to your door, exactly when you need them.
             </p>
             
-            <div className="bg-slate-50 rounded-2xl p-4 border border-slate-200 flex items-center justify-between">
+            <div className="pt-6 mt-6 border-t border-slate-100 flex items-center justify-between">
               <div>
-                <div className="text-brand-text font-bold mb-1">Standard Tier</div>
+                <div className="text-slate-900 font-bold text-lg mb-1">Standard Tier</div>
                 <div className="text-sm text-slate-500">Breakfast & Lunch</div>
               </div>
               <div className="text-right">
-                <div className="text-brand-cta font-heading font-bold text-2xl italic">₹3600<span className="text-sm not-italic text-slate-400">/mo</span></div>
+                <div className="text-brand-cta font-heading font-black text-3xl">₹3600<span className="text-sm font-sans font-medium text-slate-400"> /mo</span></div>
               </div>
             </div>
           </div>
